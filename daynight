@@ -1,0 +1,21 @@
+#!/bin/sh
+
+FOLDER="$HOME/git/daynight"
+
+state=$(tail -n1 "$FOLDER"/status)
+
+set_day(){
+    echo day > "$FOLDER"/status
+    exit 0
+}
+
+set_night(){
+    echo night > "$FOLDER"/status
+    exit 0
+}
+
+case $state in
+    day) set_night 0 ;;
+    night) set_day 1 ;;
+    *) exit 1 ;;
+esac
