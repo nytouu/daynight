@@ -1,16 +1,55 @@
 #!/bin/sh
 
 FOLDER="$HOME/git/daynight"
+THEME="catppuccin"
 
 state=$(tail -n1 "$FOLDER"/status)
 
 set_day(){
     echo day > "$FOLDER"/status
+
+    rm -f "$HOME"/scripts/bar-colors
+    rm -f "$HOME"/.config/dunst/dunstrc
+    rm -f "$HOME"/.config/qutebrowser/config.py
+    rm -f "$HOME"/.config/x11/Xresources
+    rm -f "$HOME"/.config/zathura/zathurarc
+    cp "$FOLDER"/"$THEME"/day/bar-colors "$HOME"/scripts/bar-colors
+    cp "$FOLDER"/"$THEME"/day/dunstrc "$HOME"/.config/dunst/dunstrc
+    cp "$FOLDER"/"$THEME"/day/config.py "$HOME"/.config/qutebrowser/config.py
+    cp "$FOLDER"/"$THEME"/day/Xresources "$HOME"/.config/x11/Xresources
+    cp "$FOLDER"/"$THEME"/day/zathurarc "$HOME"/.config/zathura/zathurarc
+    sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/plugins.lua
+
+    xrdb merge "$HOME"/.config/x11/Xresources
+    pkill hydrablocks && hydrablocks &
+    xdotool key super+ctrl+x
+    kill -USR1 $(pidof st)
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
     exit 0
 }
 
 set_night(){
     echo night > "$FOLDER"/status
+
+    rm -f "$HOME"/scripts/bar-colors
+    rm -f "$HOME"/.config/dunst/dunstrc
+    rm -f "$HOME"/.config/qutebrowser/config.py
+    rm -f "$HOME"/.config/x11/Xresources
+    rm -f "$HOME"/.config/zathura/zathurarc
+    cp "$FOLDER"/"$THEME"/night/bar-colors "$HOME"/scripts/bar-colors
+    cp "$FOLDER"/"$THEME"/night/dunstrc "$HOME"/.config/dunst/dunstrc
+    cp "$FOLDER"/"$THEME"/night/config.py "$HOME"/.config/qutebrowser/config.py
+    cp "$FOLDER"/"$THEME"/night/Xresources "$HOME"/.config/x11/Xresources
+    cp "$FOLDER"/"$THEME"/night/zathurarc "$HOME"/.config/zathura/zathurarc
+    sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/plugins.lua
+
+    xrdb merge "$HOME"/.config/x11/Xresources
+    pkill hydrablocks && hydrablocks &
+    xdotool key super+ctrl+x
+    kill -USR1 $(pidof st)
+    sleep 1 && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
     exit 0
 }
 
