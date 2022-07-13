@@ -1,0 +1,68 @@
+*.font: SFMono Nerd Font
+Xft.dpi: 96
+XTerm*renderFont: true
+XTerm*faceName: xft: SFMono Nerd Font
+XTerm*faceSize: 12
+Xcursor.theme: macOSBigSur
+Xcursor.size: 24
+
+*background:    #1E1E2E
+*foreground:    #CDD6F4
+*color0:        #45475A
+*color8:        #585B70
+*color1:        #F38BA8
+*color9:        #F38BA8
+*color2:        #A6E3A1
+*color10:       #A6E3A1
+*color3:        #F9E2AF
+*color11:       #F9E2AF
+*color4:        #89B4FA
+*color12:       #89B4FA
+*color5:        #F5C2E7
+*color13:       #F5C2E7
+*color6:        #94E2D5
+*color14:       #94E2D5
+*color7:        #BAC2DE
+*color15:       #A6ADC8
+
+st.font: SF Mono:style=Regular:size=12
+st.background:    #1E1E2E
+st.foreground:    #CDD6F4
+st.color0:        #45475A
+st.color8:        #585B70
+st.color1:        #F38BA8
+st.color9:        #F38BA8
+st.color2:        #A6E3A1
+st.color10:       #A6E3A1
+st.color3:        #F9E2AF
+st.color11:       #F9E2AF
+st.color4:        #89B4FA
+st.color12:       #89B4FA
+st.color5:        #F5C2E7
+st.color13:       #F5C2E7
+st.color6:        #94E2D5
+st.color14:       #94E2D5
+st.color7:        #BAC2DE
+st.color15:       #A6ADC8
+
+hydra.white:        #CDD6F4
+hydra.lightblue:    #94E2D5
+hydra.yellow:       #F9E2AF
+hydra.orange:       #F7CEAF
+hydra.purple:       #F5C2E7
+hydra.green:        #A6E3A1
+hydra.red:          #F38BA8
+hydra.blue:         #89B4FA
+hydra.gray:         #585B70
+hydra.darkgray:     #1E1E2E
+hydra.black:        #0f0f14
+
+dmenu.font: 		SFMono Nerd Font
+dmenu.normfg: 		#CDD6F4
+dmenu.normbg: 		#1E1E2E
+dmenu.selfg: 		#1E1E2E
+dmenu.selbg: 		#f7ceaf
+dmenu.selhlfg: 		#ffffff
+dmenu.selhlbg: 		#f7ceaf
+dmenu.normhlfg: 	#f7ceaf
+dmenu.normhlbg: 	#1E1E2E

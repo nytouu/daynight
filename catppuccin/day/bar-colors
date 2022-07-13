@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# colors for status2d
+
+# light mode
+red="^b#D20F39^"
+redfg="^c#D20F39^"
+blue="^b#1E66F5^"
+lightblue="^b#179299^"
+pink="^b#EA76CB^"
+lime="^b#73daca^"
+orange="^b#DF8E1D^"
+green="^b#40A02B^"
+yellow="^b#b68948^"
+gray="^b#ACB0BE^"
+bg="^c#EFF1F5^"
