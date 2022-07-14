@@ -22,10 +22,12 @@ set_day(){
 
     xrdb merge "$HOME"/.config/x11/Xresources
     pkill hydrablocks && hydrablocks &
+    pkill dunst && dunst &
     xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
     nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
+    notify-send -a daynight "changed to light theme"
     exit 0
 }
 
@@ -46,10 +48,12 @@ set_night(){
 
     xrdb merge "$HOME"/.config/x11/Xresources
     pkill hydrablocks && hydrablocks &
+    pkill dunst && dunst &
     xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
     sleep 1 && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
+    notify-send -a daynight "changed to dark theme"
     exit 0
 }
 
