@@ -26,6 +26,7 @@ Xcursor.size: 24
 *color15:       #BCC0CC
 
 st.font: SF Mono:style=Regular:size=12
+st.aplha: 0.95
 st.background:  #EFF1F5
 st.foreground:  #4C4F69
 st.st.color0:   #5C5F77
