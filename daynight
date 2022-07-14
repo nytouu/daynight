@@ -51,7 +51,7 @@ set_night(){
     pkill dunst && dunst &
     xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
-    sleep 1 && nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
     notify-send -a daynight "changed to dark theme"
     exit 0
