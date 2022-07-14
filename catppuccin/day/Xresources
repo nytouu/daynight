@@ -59,10 +59,10 @@ hydra.black:        #0f0f14
 
 dmenu.font: 		SFMono Nerd Font
 dmenu.normfg: 		#4C4F69
-dmenu.normbg: 		#BCC0CC
-dmenu.selfg: 		#BCC0CC
-dmenu.selbg: 		#179299
+dmenu.normbg: 		#EFF1F5
+dmenu.selfg: 		#EFF1F5
+dmenu.selbg: 		#DF8E1D
 dmenu.selhlfg: 		#ffffff
-dmenu.selhlbg: 		#179299
-dmenu.normhlfg: 	#ffffff
-dmenu.normhlbg: 	#BCC0CC
+dmenu.selhlbg: 		#DF8E1D
+dmenu.normhlfg: 	#DF8E1D
+dmenu.normhlbg: 	#EFF1F5
