@@ -17,6 +17,7 @@ set_day(){
     rm -r "$HOME"/.config/nvim/lua/autocmd.lua
     rm -f "$HOME"/.config/gtk-3.0/settings.ini
     rm -f "$HOME"/.config/gtk-4.0/settings.ini
+    rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
     cp "$FOLDER"/"$THEME"/day/bar-colors "$HOME"/scripts/bar-colors
     cp "$FOLDER"/"$THEME"/day/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/day/config.py "$HOME"/.config/qutebrowser/config.py
@@ -26,12 +27,14 @@ set_day(){
     cp "$FOLDER"/"$THEME"/day/autocmd.lua "$HOME"/.config/nvim/lua/autocmd.lua
     cp "$FOLDER"/"$THEME"/day/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
     cp "$FOLDER"/"$THEME"/day/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
+    cp "$FOLDER"/"$THEME"/day/xsettingsd.conf "$HOME"/.config/xsettingsd/xsettingsd.conf
     sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/plug/cat.lua
 
 
     xrdb merge "$HOME"/.config/x11/Xresources
     pkill hydrablocks && hydrablocks &
     pkill dunst && dunst &
+    pkill xsettingsd && xsettingsd &
     xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
     nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
@@ -52,6 +55,7 @@ set_night(){
     rm -r "$HOME"/.config/nvim/lua/autocmd.lua
     rm -f "$HOME"/.config/gtk-3.0/settings.ini
     rm -f "$HOME"/.config/gtk-4.0/settings.ini
+    rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
     cp "$FOLDER"/"$THEME"/night/bar-colors "$HOME"/scripts/bar-colors
     cp "$FOLDER"/"$THEME"/night/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/night/config.py "$HOME"/.config/qutebrowser/config.py
@@ -61,12 +65,14 @@ set_night(){
     cp "$FOLDER"/"$THEME"/night/autocmd.lua "$HOME"/.config/nvim/lua/autocmd.lua
     cp "$FOLDER"/"$THEME"/night/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
     cp "$FOLDER"/"$THEME"/night/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
+    cp "$FOLDER"/"$THEME"/night/xsettingsd.conf "$HOME"/.config/xsettingsd/xsettingsd.conf
     sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/plug/cat.lua
 
 
     xrdb merge "$HOME"/.config/x11/Xresources
     pkill hydrablocks && hydrablocks &
     pkill dunst && dunst &
+    pkill xsettingsd && xsettingsd &
     xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
     nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
