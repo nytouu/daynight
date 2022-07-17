@@ -15,6 +15,8 @@ set_day(){
     rm -f "$HOME"/.config/zathura/zathurarc
     rm -f "$HOME"/.config/nvim/lua/plug/statusline.lua
     rm -r "$HOME"/.config/nvim/lua/autocmd.lua
+    rm -f "$HOME"/.config/gtk-3.0/settings.ini
+    rm -f "$HOME"/.config/gtk-4.0/settings.ini
     cp "$FOLDER"/"$THEME"/day/bar-colors "$HOME"/scripts/bar-colors
     cp "$FOLDER"/"$THEME"/day/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/day/config.py "$HOME"/.config/qutebrowser/config.py
@@ -22,6 +24,8 @@ set_day(){
     cp "$FOLDER"/"$THEME"/day/zathurarc "$HOME"/.config/zathura/zathurarc
     cp "$FOLDER"/"$THEME"/day/statusline.lua "$HOME"/.config/nvim/lua/plug/statusline.lua
     cp "$FOLDER"/"$THEME"/day/autocmd.lua "$HOME"/.config/nvim/lua/autocmd.lua
+    cp "$FOLDER"/"$THEME"/day/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
+    cp "$FOLDER"/"$THEME"/day/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
     sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/plug/cat.lua
 
 
@@ -46,6 +50,8 @@ set_night(){
     rm -f "$HOME"/.config/zathura/zathurarc
     rm -f "$HOME"/.config/nvim/lua/plug/statusline.lua
     rm -r "$HOME"/.config/nvim/lua/autocmd.lua
+    rm -f "$HOME"/.config/gtk-3.0/settings.ini
+    rm -f "$HOME"/.config/gtk-4.0/settings.ini
     cp "$FOLDER"/"$THEME"/night/bar-colors "$HOME"/scripts/bar-colors
     cp "$FOLDER"/"$THEME"/night/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/night/config.py "$HOME"/.config/qutebrowser/config.py
@@ -53,6 +59,8 @@ set_night(){
     cp "$FOLDER"/"$THEME"/night/zathurarc "$HOME"/.config/zathura/zathurarc
     cp "$FOLDER"/"$THEME"/night/statusline.lua "$HOME"/.config/nvim/lua/plug/statusline.lua
     cp "$FOLDER"/"$THEME"/night/autocmd.lua "$HOME"/.config/nvim/lua/autocmd.lua
+    cp "$FOLDER"/"$THEME"/night/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
+    cp "$FOLDER"/"$THEME"/night/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
     sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/plug/cat.lua
 
 
