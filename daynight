@@ -13,12 +13,15 @@ set_day(){
     rm -f "$HOME"/.config/qutebrowser/config.py
     rm -f "$HOME"/.config/x11/Xresources
     rm -f "$HOME"/.config/zathura/zathurarc
+    rm -f "$HOME"/.config/nvim/lua/plug/statusline.lua
     cp "$FOLDER"/"$THEME"/day/bar-colors "$HOME"/scripts/bar-colors
     cp "$FOLDER"/"$THEME"/day/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/day/config.py "$HOME"/.config/qutebrowser/config.py
     cp "$FOLDER"/"$THEME"/day/Xresources "$HOME"/.config/x11/Xresources
     cp "$FOLDER"/"$THEME"/day/zathurarc "$HOME"/.config/zathura/zathurarc
-    sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/plugins.lua
+    cp "$FOLDER"/"$THEME"/day/statusline.lua "$HOME"/.config/nvim/lua/plug/statusline.lua
+    sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/plug/cat.lua
+
 
     xrdb merge "$HOME"/.config/x11/Xresources
     pkill hydrablocks && hydrablocks &
@@ -39,12 +42,15 @@ set_night(){
     rm -f "$HOME"/.config/qutebrowser/config.py
     rm -f "$HOME"/.config/x11/Xresources
     rm -f "$HOME"/.config/zathura/zathurarc
+    rm -f "$HOME"/.config/nvim/lua/plug/statusline.lua
     cp "$FOLDER"/"$THEME"/night/bar-colors "$HOME"/scripts/bar-colors
     cp "$FOLDER"/"$THEME"/night/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/night/config.py "$HOME"/.config/qutebrowser/config.py
     cp "$FOLDER"/"$THEME"/night/Xresources "$HOME"/.config/x11/Xresources
     cp "$FOLDER"/"$THEME"/night/zathurarc "$HOME"/.config/zathura/zathurarc
-    sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/plugins.lua
+    cp "$FOLDER"/"$THEME"/night/statusline.lua "$HOME"/.config/nvim/lua/plug/statusline.lua
+    sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/plug/cat.lua
+
 
     xrdb merge "$HOME"/.config/x11/Xresources
     pkill hydrablocks && hydrablocks &
