@@ -3,11 +3,11 @@ local gls = gl.section
 gl.short_line_list = {'NvimTree','vista','dbui','packager','toggleterm'}
 
 local colors = {
-	bg = '#e0e3e9',
+	bg = '#d2d4d9',
 	dark_fg = '#5C5F77',
 	fg = '#4C4F69',
-	dark_bg = '#d2d4d9',
-	yellow = '#dfb71d',
+	dark_bg = '#e6e9ef',
+	yellow = '#dfae1d',
 	cyan = '#179299',
 	green = '#40A02B',
 	orange = '#DF8E1D',
