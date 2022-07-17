@@ -4,7 +4,7 @@
 
 # dark mode
 red="^b#F38BA8^"
-redfg="^cF38BA8^"
+redfg="^c#F38BA8^"
 blue="^b#89B4FA^"
 lightblue="^b#94E2D5^"
 pink="^b#F5C2E7^"
