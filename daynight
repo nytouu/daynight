@@ -18,6 +18,8 @@ set_day(){
     rm -f "$HOME"/.config/gtk-3.0/settings.ini
     rm -f "$HOME"/.config/gtk-4.0/settings.ini
     rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
+	rm -f "$HOME"/.config/dk/dkrc
+	rm -f "$HOME"/scripts/lemonbar-dk
     cp "$FOLDER"/"$THEME"/day/bar-colors "$HOME"/scripts/bar-colors
     cp "$FOLDER"/"$THEME"/day/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/day/config.py "$HOME"/.config/qutebrowser/config.py
@@ -28,6 +30,8 @@ set_day(){
     cp "$FOLDER"/"$THEME"/day/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
     cp "$FOLDER"/"$THEME"/day/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
     cp "$FOLDER"/"$THEME"/day/xsettingsd.conf "$HOME"/.config/xsettingsd/xsettingsd.conf
+	cp "$FOLDER"/"$THEME"/day/dkrc "$HOME"/.config/dk/dkrc
+	cp "$FOLDER"/"$THEME"/day/lemonbar-dk "$HOME"/scripts/lemonbar-dk
     sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/plug/cat.lua
 
 
@@ -37,6 +41,8 @@ set_day(){
     pkill xsettingsd && xsettingsd &
     xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
+    pkill lemonbar && lemonbar-dk &
+    dkcmd reload
     nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
     notify-send -a daynight "changed to light theme"
@@ -56,6 +62,8 @@ set_night(){
     rm -f "$HOME"/.config/gtk-3.0/settings.ini
     rm -f "$HOME"/.config/gtk-4.0/settings.ini
     rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
+	rm -f "$HOME"/.config/dk/dkrc
+	rm -f "$HOME"/scripts/lemonbar-dk
     cp "$FOLDER"/"$THEME"/night/bar-colors "$HOME"/scripts/bar-colors
     cp "$FOLDER"/"$THEME"/night/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/night/config.py "$HOME"/.config/qutebrowser/config.py
@@ -66,6 +74,8 @@ set_night(){
     cp "$FOLDER"/"$THEME"/night/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
     cp "$FOLDER"/"$THEME"/night/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
     cp "$FOLDER"/"$THEME"/night/xsettingsd.conf "$HOME"/.config/xsettingsd/xsettingsd.conf
+	cp "$FOLDER"/"$THEME"/night/dkrc "$HOME"/.config/dk/dkrc
+	cp "$FOLDER"/"$THEME"/night/lemonbar-dk "$HOME"/scripts/lemonbar-dk
     sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/plug/cat.lua
 
 
@@ -75,6 +85,8 @@ set_night(){
     pkill xsettingsd && xsettingsd &
     xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
+    pkill lemonbar && lemonbar-dk &
+    dkcmd reload
     nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
     notify-send -a daynight "changed to dark theme"
