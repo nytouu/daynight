@@ -1,7 +1,9 @@
 #!/bin/sh
 
 FOLDER="$HOME/git/daynight"
-THEME="catppuccin"
+
+# default theme
+THEME=$(tail -n1 "$FOLDER"/theme)
 
 state=$(tail -n1 "$FOLDER"/status)
 
@@ -35,6 +37,14 @@ set_day(){
 	cp "$FOLDER"/"$THEME"/day/lemonbar-dk "$HOME"/scripts/lemonbar-dk
     sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/plug/cat.lua
 	cp "$FOLDER"/"$THEME"/day/userChrome.css "$HOME"/.librewolf/xgdgxsh8.default-release/chrome/userChrome.css
+    case $THEME in
+        catppuccin) sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/plug/cat.lua ; \
+                    sed -i '2s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '3s/^*/vim.cmd[[colorscheme catppuccin]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+
+        oxocarbon)  sed -i '2s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '3s/^*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+    esac
 
 
     xrdb merge "$HOME"/.config/x11/Xresources
@@ -81,6 +91,14 @@ set_night(){
 	cp "$FOLDER"/"$THEME"/night/lemonbar-dk "$HOME"/scripts/lemonbar-dk
     sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/plug/cat.lua
 	cp "$FOLDER"/"$THEME"/night/userChrome.css "$HOME"/.librewolf/xgdgxsh8.default-release/chrome/userChrome.css
+    case $THEME in
+        catppuccin) sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/plug/cat.lua ; \
+                    sed -i '2s/light/darak/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '3s/^*/vim.cmd[[colorscheme catppuccin]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+
+        oxocarbon)  sed -i '2s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '3s/^*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+    esac
 
 
     xrdb merge "$HOME"/.config/x11/Xresources
@@ -97,8 +115,15 @@ set_night(){
     exit 0
 }
 
+case $1 in
+    --carbon)   echo oxocarbon      > "$FOLDER"/theme && set_night && exit 0 ;;
+    --tokyo)    echo tokyonight     > "$FOLDER"/theme && set_night && exit 0 ;;
+    --cat)      echo catppuccin     > "$FOLDER"/theme && set_night && exit 0 ;;
+    *) echo "no args provided, switching style";;
+esac
+
 case $state in
-    day) set_night 0 ;;
-    night) set_day 1 ;;
+    day) set_night ;;
+    night) set_day ;;
     *) exit 1 ;;
 esac
