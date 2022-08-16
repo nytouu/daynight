@@ -1,0 +1,70 @@
+*.font: SFMono Nerd Font
+Xft.dpi: 96
+XTerm*renderFont: true
+XTerm*faceName: xft: SFMono Nerd Font
+XTerm*faceSize: 12
+Xcursor.theme: Fluent
+Xcursor.size: 24
+
+*background:    #161616
+*foreground:    #dde1e6
+*color0:        #262626
+*color8:        #393939
+*color1:        #ee5396
+*color9:        #ee5396
+*color2:        #42be65
+*color10:       #42be65
+*color3:        #F9E2AF
+*color11:       #F9E2AF
+*color4:        #82cfff
+*color12:       #82cfff
+*color5:        #be95ff
+*color13:       #be95ff
+*color6:        #3ddbd9
+*color14:       #3ddbd9
+*color7:        #525252
+*color15:       #525252
+
+st.font: SF Mono:style=Regular:size=12
+st.alpha: 1.00
+st.background:    #161616
+st.foreground:    #dde1e6
+st.color0:        #262626
+st.color8:        #393939
+st.color1:        #ee5396
+st.color9:        #ee5396
+st.color2:        #42be65
+st.color10:       #42be65
+st.color3:        #F9E2AF
+st.color11:       #F9E2AF
+st.color4:        #82cfff
+st.color12:       #82cfff
+st.color5:        #be95ff
+st.color13:       #be95ff
+st.color6:        #3ddbd9
+st.color14:       #3ddbd9
+st.color7:        #525252
+st.color15:       #525252
+
+hydra.border:       #393939
+hydra.white:        #dde1e6
+hydra.lightblue:    #3ddbd9
+hydra.yellow:       #F9E2AF
+hydra.orange:       #FFAB91
+hydra.purple:       #ff7eb6
+hydra.green:        #42be65
+hydra.red:          #ee5396
+hydra.blue:         #82cfff
+hydra.gray:         #393939
+hydra.darkgray:     #161616
+hydra.black:        #0f0f0f
+
+dmenu.font: 		SFMono Nerd Font
+dmenu.normfg: 		#dde1e6
+dmenu.normbg: 		#161616
+dmenu.selfg: 		#161616
+dmenu.selbg: 		#ee5396
+dmenu.selhlfg: 		#ffffff
+dmenu.selhlbg: 		#ee5396
+dmenu.normhlfg: 	#ee5396
+dmenu.normhlbg: 	#161616
