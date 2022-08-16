@@ -46,6 +46,7 @@ st.color14:     #179299
 st.color7:      #ACB0BE
 st.color15:     #BCC0CC
 
+hydra.border:       #4C4F69
 hydra.white:        #4C4F69
 hydra.lightblue:    #179299
 hydra.yellow:       #b68948
