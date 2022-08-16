@@ -20,6 +20,7 @@ set_day(){
     rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
 	rm -f "$HOME"/.config/dk/dkrc
 	rm -f "$HOME"/scripts/lemonbar-dk
+	rm -f "$HOME"/.librewolf/*.default-release/chrome/userChrome.css
     cp "$FOLDER"/"$THEME"/day/bar-colors "$HOME"/scripts/bar-colors
     cp "$FOLDER"/"$THEME"/day/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/day/config.py "$HOME"/.config/qutebrowser/config.py
@@ -33,6 +34,7 @@ set_day(){
 	cp "$FOLDER"/"$THEME"/day/dkrc "$HOME"/.config/dk/dkrc
 	cp "$FOLDER"/"$THEME"/day/lemonbar-dk "$HOME"/scripts/lemonbar-dk
     sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/plug/cat.lua
+	cp "$FOLDER"/"$THEME"/day/userChrome.css "$HOME"/.librewolf/xgdgxsh8.default-release/chrome/userChrome.css
 
 
     xrdb merge "$HOME"/.config/x11/Xresources
@@ -64,6 +66,7 @@ set_night(){
     rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
 	rm -f "$HOME"/.config/dk/dkrc
 	rm -f "$HOME"/scripts/lemonbar-dk
+	rm -f "$HOME"/.librewolf/*.default-release/chrome/userChrome.css
     cp "$FOLDER"/"$THEME"/night/bar-colors "$HOME"/scripts/bar-colors
     cp "$FOLDER"/"$THEME"/night/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/night/config.py "$HOME"/.config/qutebrowser/config.py
@@ -77,6 +80,7 @@ set_night(){
 	cp "$FOLDER"/"$THEME"/night/dkrc "$HOME"/.config/dk/dkrc
 	cp "$FOLDER"/"$THEME"/night/lemonbar-dk "$HOME"/scripts/lemonbar-dk
     sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/plug/cat.lua
+	cp "$FOLDER"/"$THEME"/night/userChrome.css "$HOME"/.librewolf/xgdgxsh8.default-release/chrome/userChrome.css
 
 
     xrdb merge "$HOME"/.config/x11/Xresources
