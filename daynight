@@ -49,15 +49,15 @@ set_day(){
     esac
 
 
-    xrdb merge "$HOME"/.config/x11/Xresources
-    pkill hydrablocks && hydrablocks &
-    pkill dunst && dunst &
-    pkill xsettingsd && xsettingsd &
+    xrdb merge "$HOME"/.config/x11/Xresources > /dev/null 2>&1
+    pkill hydrablocks && hydrablocks > /dev/null 2>&1 &
+    pkill dunst && dunst > /dev/null 2>&1 &
+    pkill xsettingsd && xsettingsd > /dev/null 2>&1 &
     xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
     # pkill lemonbar && lemonbar-dk &
     # dkcmd reload
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' > /dev/null 2>&1
 
     notify-send -a daynight "changed to light theme"
     exit 0
@@ -107,15 +107,15 @@ set_night(){
     esac
 
 
-    xrdb merge "$HOME"/.config/x11/Xresources
-    pkill hydrablocks && hydrablocks &
-    pkill dunst && dunst &
-    pkill xsettingsd && xsettingsd &
+    xrdb merge "$HOME"/.config/x11/Xresources > /dev/null 2>&1
+    pkill hydrablocks && hydrablocks > /dev/null 2>&1 &
+    pkill dunst && dunst > /dev/null 2>&1 &
+    pkill xsettingsd && xsettingsd > /dev/null 2>&1 &
     xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
     # pkill lemonbar && lemonbar-dk &
     # dkcmd reload
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' > /dev/null 2>&1
 
     notify-send -a daynight "changed to dark theme"
     exit 0
