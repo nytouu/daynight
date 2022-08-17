@@ -41,10 +41,10 @@ set_day(){
     case $THEME in
         catppuccin) sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/plug/cat.lua ; \
                     sed -i '2s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '3s/^*/vim.cmd[[colorscheme catppuccin]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+                    sed -i '3s/.*/require("plug.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
         oxocarbon)  sed -i '2s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '3s/^*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+                    sed -i '3s/.*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
     esac
 
 
@@ -95,11 +95,11 @@ set_night(){
 	# cp "$FOLDER"/"$THEME"/night/lemonbar-dk "$HOME"/scripts/lemonbar-dk
     case $THEME in
         catppuccin) sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/plug/cat.lua ; \
-                    sed -i '2s/light/darak/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '3s/^*/vim.cmd[[colorscheme catppuccin]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+                    sed -i '2s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '3s/.*/require("plug.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
         oxocarbon)  sed -i '2s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '3s/^*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+                    sed -i '3s/.*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
     esac
 
 
