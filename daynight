@@ -2,12 +2,13 @@
 
 FOLDER="$HOME/git/daynight"
 
-# default theme
-THEME=$(tail -n1 "$FOLDER"/theme)
-
+# TODO find a better way to do this
 state=$(tail -n1 "$FOLDER"/status)
 
 set_day(){
+    state=$(tail -n1 "$FOLDER"/status)
+    THEME=$(tail -n1 "$FOLDER"/theme)
+
     echo day > "$FOLDER"/status
 
     rm -f "$HOME"/scripts/bar-colors
@@ -63,6 +64,9 @@ set_day(){
 }
 
 set_night(){
+    state=$(tail -n1 "$FOLDER"/status)
+    THEME=$(tail -n1 "$FOLDER"/theme)
+
     echo night > "$FOLDER"/status
 
     rm -f "$HOME"/scripts/bar-colors
