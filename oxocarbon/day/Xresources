@@ -1,9 +1,9 @@
 *.font: SFMono Nerd Font
-Xft.dpi: 96
+Xft.dpi: 116
 XTerm*renderFont: true
 XTerm*faceName: xft: SFMono Nerd Font
 XTerm*faceSize: 12
-Xcursor.theme: Fluent-dark
+Xcursor.theme: Bibata-Original-Ice
 Xcursor.size: 24
 
 *background:    #ECEFF1

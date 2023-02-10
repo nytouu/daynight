@@ -4,16 +4,16 @@
 # simple lightweight lemonbar script for use with dk
 
 
-bg="#1E1E2E"
-fg="#CDD6F4"
-color1="#F38BA8"
-color2="#A6E3A1"
+bg="#161616"
+fg="#dde1e6"
+color1="#ee5396"
+color2="#42be65"
 color3="#F9E2AF"
-color4="#89B4FA"
-color5="#F5C2E7"
-color6="#94E2D5"
-color7="#f7ceaf"
-under="#585B70"
+color4="#82cfff"
+color5="#ff7eb6"
+color6="#3ddbd9"
+color7="#FFAB91"
+under="#525252"
 underline=2
 separator=" "
 

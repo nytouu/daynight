@@ -10,7 +10,7 @@ export CARGO_HOME="$HOME/.local/share/cargo"
 export GOPATH="$HOME/.local/share/go"
 export HISTFILE="$HOME/.local/share/history"
 
-export QT_QPA_PLATFORMTHEME=kvantum
+export QT_QPA_PLATFORMTHEME=qt5ct
 # export SDL_JOYSTICK_HIDAPI=0
 export _JAVA_AWT_WM_NONPARENTING=1
 export EDITOR="nvim"
@@ -43,7 +43,7 @@ fi
 
 	# default workspace '_' values used when allocating new workspaces
 	# can be applied to all existing workspaces when passed 'apply' after ws=_
-	dkcmd set ws=_ apply layout=tile master=1 stack=3 gap=16 msplit=0.5 ssplit=0.5
+	dkcmd set ws=_ apply layout=tile master=1 gap=16 msplit=0.5 ssplit=0.5
 
 	# change workspace names (default: number == name)
 	dkcmd set \
@@ -107,12 +107,12 @@ fi
 	# outer width must be less than width, outer width of 0 will be single borders
 	dkcmd set border width=6 outer_width=4 \
 		colour \
-		focus='#89B4FA' \
-		unfocus='#45475A' \
-		urgent='#F38BA8' \
-		outer_focus='#1E1E2E' \
-		outer_unfocus='#1E1E2E' \
-		outer_urgent='#1E1E2E'
+		focus='#82cfff' \
+		unfocus='#262626' \
+		urgent='#ee5396' \
+		outer_focus='#161616' \
+		outer_unfocus='#161616' \
+		outer_urgent='#161616'
 
 
 	# window rules
@@ -122,6 +122,8 @@ fi
 
 	# open window(s) on a specific workspace (assigned monitor)
 	dkcmd rule class="^discord$" ws=6
+	dkcmd rule class="^librewolf$" ws=4
+	dkcmd rule class="^Steam$" ws=1
 
 	# open window(s) and use a callback function (user defined in config.h)
 	# we also ignore=true to stop the window from being resized on it's own from events
