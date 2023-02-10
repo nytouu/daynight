@@ -22,7 +22,7 @@
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    width = 300
+    width = (0, 350)
 
     # The maximum height of a single notification, excluding the frame.
     height = 100
@@ -142,10 +142,6 @@
     # geometry.
     word_wrap = yes
 
-    # When word_wrap is set to no, specify where to make an ellipsis in long lines.
-    # Possible values are "start", "middle" and "end".
-    ellipsize = middle
-
     # Ignore newlines '\n' in notifications.
     ignore_newline = no
 
@@ -242,14 +238,14 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#161616"
     foreground = "#dde1e6"
-    timeout = 10
+    timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 
 [urgency_normal]
     background = "#161616"
     foreground = "#dde1e6"
-    timeout = 10
+    timeout = 5
     # Icon for notifications with normal urgency, uncomment to enable
     #icon = /path/to/icon
 

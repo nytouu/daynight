@@ -1,272 +1,171 @@
-local gl = require('galaxyline')
-local gls = gl.section
-gl.short_line_list = {'NvimTree','vista','dbui','packager','toggleterm'}
+/*=============================================================================*
+ *                               ONELINE PROTON                                *
+ *                                                                             *
+ * description    : An oneline userChrome.css theme for Firefox, which aims to *
+ *                  keep the Proton experience.                                *
+ * compatibility  : Firefox 89+                                                *
+ * repository     : https://github.com/lr-tech/OnelineProton/                  *
+ *                                                                             *
+ * THANKS FOR USING MY USERCHROME! <3                                          *
+ *============================================================================*/
 
-local colors = {
-	bg = '#101010',
-	dark_bg = '#0c0c0c',
-	fg = '#dde1e6',
-	dark_fg = '#525252',
-	yellow = '#F9E2AF',
-	cyan = '#3ddbd9',
-	green = '#42be65',
-	orange = '#FFAB91',
-	magenta = '#ff7eb6',
-	blue = '#82cfff',
-	red = '#ee5396'
-}
 
-local icons = {
-	error  = '  ',
-	warn   = '  ',
-	info   = '  ',
-	hint   = '  ',
-	git    = '  ',
-	gitadd = ' ﰂ ',
-	gitdel = ' ﯰ ',
-	gitmod = ' 柳'
-}
+/* S E T T I N G S */
 
-local buffer_not_empty = function()
-	if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
-		return true
-	end
-	return false
-end
-
-local function highlight(group, fg, bg, gui)
-    local comd = string.format('highlight %s guifg=%s guibg=%s', group, fg, bg)
-    if gui ~= nil then comd = comd .. ' gui=' .. gui end
-    vim.cmd(comd)
-end
-
-local checkwidth = function()
-	local squeeze_width  = vim.fn.winwidth(0) / 2
-	if squeeze_width > 40 then
-		return true
-	end
-	return false
-end
-
-gls.left[1] = {
-	ViMode = {
-		provider = function()
-		-- auto change color according the vim mode
-		local mode_color = {n = colors.blue, i = colors.green,v=colors.yellow,
-							[''] = colors.yellow,V=colors.yellow,
-							c = colors.green,no = colors.magenta,s = colors.orange,
-							S=colors.orange,[''] = colors.orange,
-							ic = colors.yellow,R = colors.red,Rv = colors.red,
-							cv = colors.orange,ce=colors.orange, r = colors.red,
-							rm = colors.cyan, ['r?'] = colors.cyan,
-							['!']  = colors.red,t = colors.blue}
-		vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
-			return '▊   '
-		end,
-		highlight = {colors.red,colors.bg,'bold'}
-	}
+:root {
+  --navbarWidth     : 500px; /* Set width of navbar. Use px for a fixed width
+                                or vw for a percentage of your window. */
+  --animationSpeed  : 0.15s;
 }
 
 
-gls.left[2] = {
-	LineNr = {
-		provider = function()
-		local total_line = vim.fn.line('$')
-			return total_line
-		end,
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		condition = buffer_not_empty,
-		highlight = {colors.fg,colors.bg}
-	}
+/* H I D I N G   E L E M E N T S */
+/* Comment or uncomment depending of what elements you want to hide */
+
+/* Back button */
+#back-button { display: none !important }
+
+/* Hide back button only when disabled */
+/* #back-button[disabled="true"] { display: none !important } */
+
+/* Forward button */
+#forward-button { display: none !important }
+
+/* Hide forward button only when disabled */
+/* #forward-button[disabled="true"] { display: none !important } */
+
+/* "Shield" icon */
+/* #tracking-protection-icon-container { display: none !important } */
+
+/* Site information button */
+#identity-box { display: none !important }
+
+/* This is the "Search with" indicator on the urlbar */
+/* #urlbar-search-mode-indicator { display: none !important } */
+
+/* Zoom button */
+/* #urlbar-zoom-button { display: none !important } */
+
+/* Page action (right three dash button) */
+/* #pageActionButton { display: none !important } */
+
+/* These are the buttons on the right of the urlbar */
+/* #page-action-buttons { display: none !important } */
+
+/* #urlbar-label-box { display: none !important } */
+
+/* This one is the hamburger menu! */
+/* CAUTION: if you hide this some popups may be bugged */
+/* #PanelUI-button { display: none !important } */
+
+/* Tab close button */
+/* .tab-close-button { display: none !important } */
+
+/* Enable this to show the tab close button when hovering the tab */
+/* .tabbrowser-tab:hover .tab-close-button { display: -moz-inline-box !important } */
+
+/*============================================================================*/
+
+
+/* Oneline tweak */
+
+#TabsToolbar {
+  margin-left : var(--navbarWidth) !important;
 }
 
-gls.left[3] ={
-    FileIcon = {
-        provider = function()
-            local fname, ext = vim.fn.expand '%:t', vim.fn.expand '%:e'
-            local icon, iconhl = require'nvim-web-devicons'.get_icon(fname, ext)
-            if icon == nil then return '' end
-            local fg = vim.fn.synIDattr(vim.fn.hlID(iconhl), 'fg')
-            highlight('GalaxyFileIcon', fg, colors.bg)
-            return ' ' .. icon .. ' '
-        end,
-        condition = buffer_not_empty
-    }
+#nav-bar {
+  margin-right: calc(100vw - var(--navbarWidth)) !important;
 }
 
-gls.left[4] = {
-	FileName = {
-		provider = {'FileName'},
-		separator = '',
-		condition = buffer_not_empty,
-		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.green,colors.bg,'bold'}
-	}
+#urlbar-container {
+  min-width   : 0px !important;
+  margin-left: 60px;
 }
 
-
-gls.left[5] = {
-	LineInfo = {
-		provider = 'LineColumn',
-		condition = checkwidth,
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.dark_fg,colors.bg}
-	}
-}
-gls.left[6] = {
-	PerCent = {
-		provider = 'LinePercent',
-		conditon = checkwidth,
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.dark_fg,colors.bg,'bold'}
-	}
+:root[uidensity="compact"] #nav-bar {
+  margin-top  : -38px !important;
+  height      : 37px !important;
 }
 
-gls.left[7] = {
-	DiffAdd = {
-		provider = 'DiffAdd',
-		icon = icons.gitadd,
-		highlight = {colors.green,colors.bg}
-	}
+:root:not([uidensity="compact"]):not([uidensity="touch"]) #nav-bar {
+  margin-top  : -45px !important;
+  height      : 44px !important;
 }
 
-gls.left[8] = {
-	DiffModified = {
-		provider = 'DiffModified',
-		icon = icons.gitmod,
-		highlight = {colors.orange,colors.bg}
-	}
-}
-gls.left[9] = {
-	DiffRemove = {
-		provider = 'DiffRemove',
-		icon = icons.gitdel,
-		highlight = {colors.red,colors.bg}
-	}
-}
-
-gls.right[1] = {
-	DiagnosticError = {
-		provider = 'DiagnosticError',
-		condition = checkwidth,
-		icon = icons.error,
-		highlight = {colors.red,colors.bg}
-	}
-}
-
-gls.right[2] = {
-	DiagnosticWarn = {
-		provider = 'DiagnosticWarn',
-		condition = checkwidth,
-		icon = icons.warn,
-		highlight = {colors.yellow,colors.bg}
-	}
-}
-
-gls.right[3] = {
-	DiagnosticHint = {
-		provider = 'DiagnosticHint',
-		condition = checkwidth,
-		icon = icons.hint,
-		highlight = {colors.cyan,colors.bg}
-	}
-}
-
-gls.right[4] = {
-	DiagnosticInfo = {
-		provider = 'DiagnosticInfo',
-		condition = checkwidth,
-		icon = icons.info,
-		highlight = {colors.blue,colors.bg}
-	}
-}
-
-gls.right[5] =
-{
-    FileType = {
-        provider = function()
-            if not buffer_not_empty() then return '' end
-            return '  ' .. vim.bo.filetype
-        end,
-        condition = buffer_not_empty,
-        highlight = {colors.cyan, colors.bg},
-    }
+:root[uidensity="touch"] #nav-bar {
+  margin-top  : -50px !important;
+  height      : 49px !important;
 }
 
 
-gls.right[6] = {
-	FileEncode = {
-		provider = 'FileEncode',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		highlight = {colors.fg,colors.bg,'bold'}
-	}
+/* Dragging space */
+:root[sizemode="maximized"] #TabsToolbar {
+  margin-top: 1px;
 }
 
-gls.right[7] = {
-	GitIcon = {
-		provider = function() return icons.git end,
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		condition = require('galaxyline.condition').check_git_workspace,
-		highlight = {colors.orange,colors.bg,'bold'}
-	}
+#TabsToolbar {
+  margin-top: 5px;
 }
 
-gls.right[8] = {
-	GitBranch = {
-		provider = 'GitBranch',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		condition = require('galaxyline.condition').check_git_workspace,
-		highlight = {colors.fg,colors.bg,'bold'}
-	}
+
+/* Simplifying interface */
+
+#nav-bar {
+  background  : none !important;
+  box-shadow  : none !important;
 }
 
-gls.right[9] = {
-	ViMode2 = {
-		provider = function()
-			return ' ▊'
-		end,
-		separator = ' ',
-		separator_highlight = {'NONE',colors.bg},
-		highlight = 'GalaxyViMode'
-	}
-}
-gls.short_line_left[1] = {
-	LeftIcon = {
-		provider = function ()
-			return '▊ '
-		end,
-		highlight = {colors.blue, colors.dark_bg}
-	}
+#navigator-toolbox {
+  border      : none !important;
 }
 
-gls.short_line_left[2] = {
-	BufferType = {
-		provider = 'FileTypeName',
-		separator = ' ',
-		separator_highlight = {'NONE',colors.dark_bg},
-		highlight = {colors.blue,colors.dark_bg,'bold'}
-	}
+.titlebar-spacer {
+  display     : none !important;
 }
 
--- gls.short_line_left[3] = {
--- 	FileName = {
--- 		condition = buffer_not_empty,
--- 		provider = function ()
--- 		local fileinfo = require('galaxyline.provider.fileinfo')
--- 		local fname = fileinfo.get_current_file_name()
--- 		for _,v in ipairs(gl.short_line_list) do
--- 			if v == vim.bo.filetype then
--- 				return ''
--- 			end
--- 		end
--- 		return fname
--- 		end,
--- 		highlight = {colors.white,colors.bg,'bold'}
--- 	}
--- }
+#urlbar-background {
+  border      : none !important;
+}
+
+#urlbar:not(:hover):not([breakout][breakout-extend]) > #urlbar-background {
+  box-shadow  : none !important;
+  background  : none !important;
+}
+
+
+/* Hide urlbar elements when not active */
+
+.urlbar-icon, #userContext-indicator, #userContext-label {
+  fill        : transparent !important;
+  background  : transparent !important;
+  color       : transparent !important;
+}
+
+#urlbar:hover .urlbar-icon,
+#urlbar:active .urlbar-icon,
+#urlbar[focused] .urlbar-icon {
+  fill        : var(--toolbar-color) !important;
+}
+
+
+/* animations */
+.subviewbutton,
+#urlbar-background,
+.urlbar-icon,
+#userContext-indicator,
+#userContext-label,
+.urlbar-input-box,
+#identity-box,
+#tracking-protection-icon-container,
+[anonid=urlbar-go-button],
+.urlbar-icon-wrapper,
+#tracking-protection-icon,
+#identity-box image,
+stack,
+tab:not(:active) .tab-background,
+tab:not([beforeselected-visible])::after,
+tab[visuallyselected] .tab-background::before,
+tab[visuallyselected] .tab-background::before,
+.tab-close-button {
+  transition  : var(--animationSpeed) !important;
+}
