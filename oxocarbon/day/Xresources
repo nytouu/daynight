@@ -1,8 +1,8 @@
 *.font: SFMono Nerd Font
-Xft.dpi: 116
+Xft.dpi: 96
 XTerm*renderFont: true
 XTerm*faceName: xft: SFMono Nerd Font
-XTerm*faceSize: 12
+XTerm*faceSize: 13
 Xcursor.theme: Bibata-Original-Ice
 Xcursor.size: 24
 
@@ -25,8 +25,8 @@ Xcursor.size: 24
 *color7:        #525252
 *color15:       #525252
 
-st.font: SF Mono:style=Regular:size=12
-st.alpha: 1.00
+st.font: SF Mono:style=Medium:size=13
+st.alpha: 0.90
 st.background:    #ECEFF1
 st.foreground:    #37474F
 st.color0:        #262626
@@ -59,7 +59,7 @@ hydra.gray:         #393939
 hydra.darkgray:     #ECEFF1
 hydra.black:        #0f0f0f
 
-dmenu.font: 		SFMono Nerd Font
+dmenu.font: 		SFMono Nerd Font:style=Medium:size=12
 dmenu.normfg: 		#37474F
 dmenu.normbg: 		#ECEFF1
 dmenu.selfg: 		#ECEFF1
