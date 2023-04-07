@@ -16,7 +16,7 @@ set_day(){
     # rm -f "$HOME"/.config/qutebrowser/config.py
     rm -f "$HOME"/.config/x11/Xresources
     # rm -f "$HOME"/.config/zathura/zathurarc
-    rm -f "$HOME"/.config/nvim/lua/config/plugins/statusline.lua
+    rm -f "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
     rm -r "$HOME"/.config/nvim/lua/autocmd.lua
     rm -f "$HOME"/.config/gtk-3.0/settings.ini
     rm -f "$HOME"/.config/gtk-4.0/settings.ini
@@ -28,8 +28,8 @@ set_day(){
     cp "$FOLDER"/"$THEME"/day/dunstrc "$HOME"/.config/dunst/dunstrc
     # cp "$FOLDER"/"$THEME"/day/config.py "$HOME"/.config/qutebrowser/config.py
     cp "$FOLDER"/"$THEME"/day/Xresources "$HOME"/.config/x11/Xresources
-    # cp "$FOLDER"/"$THEME"/day/zathurarc "$HOME"/.config/zathura/zathurarc
-    cp "$FOLDER"/"$THEME"/day/statusline.lua "$HOME"/.config/nvim/lua/config/plugins/statusline.lua
+    cp "$FOLDER"/"$THEME"/day/zathurarc "$HOME"/.config/zathura/zathurarc
+    cp "$FOLDER"/"$THEME"/day/galaxyline.lua "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
     cp "$FOLDER"/"$THEME"/day/autocmd.lua "$HOME"/.config/nvim/lua/autocmd.lua
     cp "$FOLDER"/"$THEME"/day/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
     cp "$FOLDER"/"$THEME"/day/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
@@ -44,6 +44,10 @@ set_day(){
 
         oxocarbon)  sed -i '2s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
                     sed -i '3s/.*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+
+        minimal)    sed -i '6s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '8s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
+                    # sed -i '8s/.*/vim.cmd([[colorscheme catppuccin]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
     esac
 
 
@@ -72,7 +76,7 @@ set_night(){
     # rm -f "$HOME"/.config/qutebrowser/config.py
     rm -f "$HOME"/.config/x11/Xresources
     # rm -f "$HOME"/.config/zathura/zathurarc
-    rm -f "$HOME"/.config/nvim/lua/config/plugins/statusline.lua
+    rm -f "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
     rm -r "$HOME"/.config/nvim/lua/autocmd.lua
     rm -f "$HOME"/.config/gtk-3.0/settings.ini
     rm -f "$HOME"/.config/gtk-4.0/settings.ini
@@ -84,8 +88,8 @@ set_night(){
     cp "$FOLDER"/"$THEME"/night/dunstrc "$HOME"/.config/dunst/dunstrc
     # cp "$FOLDER"/"$THEME"/night/config.py "$HOME"/.config/qutebrowser/config.py
     cp "$FOLDER"/"$THEME"/night/Xresources "$HOME"/.config/x11/Xresources
-    # cp "$FOLDER"/"$THEME"/night/zathurarc "$HOME"/.config/zathura/zathurarc
-    cp "$FOLDER"/"$THEME"/night/statusline.lua "$HOME"/.config/nvim/lua/config/plugins/statusline.lua
+    cp "$FOLDER"/"$THEME"/night/zathurarc "$HOME"/.config/zathura/zathurarc
+    cp "$FOLDER"/"$THEME"/night/galaxyline.lua "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
     cp "$FOLDER"/"$THEME"/night/autocmd.lua "$HOME"/.config/nvim/lua/autocmd.lua
     cp "$FOLDER"/"$THEME"/night/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
     cp "$FOLDER"/"$THEME"/night/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
@@ -99,7 +103,10 @@ set_night(){
                     sed -i '3s/.*/require("plug.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
         oxocarbon)  sed -i '2s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '3s/.*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+                    sed -i '3s/.*/vim.cmd([[colorscheme oxocarbon]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
+
+        minimal)    sed -i '2s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '8s/.*/vim.cmd([[colorscheme minimal]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
     esac
 
 
@@ -121,6 +128,7 @@ case $1 in
     --carbon)   echo oxocarbon      > "$FOLDER"/theme && set_night && exit 0 ;;
     --tokyo)    echo tokyonight     > "$FOLDER"/theme && set_night && exit 0 ;;
     --cat)      echo catppuccin     > "$FOLDER"/theme && set_night && exit 0 ;;
+    --minimal)  echo minimal        > "$FOLDER"/theme && set_night && exit 0 ;;
     *) echo "no args provided, switching style";;
 esac
 

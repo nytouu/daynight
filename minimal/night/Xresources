@@ -1,0 +1,72 @@
+*.font: JetBrainsMono Nerd Font
+Xft.dpi: 96
+XTerm*renderFont: true
+XTerm*faceName: xft: JetBrainsMono Nerd Font
+XTerm*faceSize: 13
+Xcursor.theme: Bibata-Original-Ice
+Xcursor.size: 24
+
+*background:    #191b20
+*foreground:    #dfe0ea
+*color0:        #272932
+*color8:        #16181d
+*color1:        #d95555
+*color9:        #e85a84
+*color2:        #94dd8e
+*color10:       #94dd8e
+*color3:        #e9d26c
+*color11:       #e9d26c
+*color4:        #7eb7e6
+*color12:       #7eb7e6
+*color5:        #d895c7
+*color13:       #d895c7
+*color6:        #89beb7
+*color14:       #89beb7
+*color7:        #cfd0d7
+*color15:       #cfd0d7
+
+st.font: JetBrains Mono:style=Medium:size=12
+st.alpha: 0.80
+st.background:    #191b20
+st.foreground:    #dfe0ea
+st.color0:        #272932
+st.color8:        #16181d
+st.color1:        #e85a84
+st.color9:        #e85a84
+st.color2:        #94dd8e
+st.color10:       #94dd8e
+st.color3:        #e9d26c
+st.color11:       #e9d26c
+st.color4:        #7eb7e6
+st.color12:       #7eb7e6
+st.color5:        #d895c7
+st.color13:       #d895c7
+st.color6:        #89beb7
+st.color14:       #89beb7
+st.color7:        #cfd0d7
+st.color15:       #dfe0ea
+
+hydra.alpha:        0xc5
+hydra.border:       #696b70
+hydra.white:        #dfe0ea
+hydra.lightblue:    #89beb7
+hydra.yellow:       #e9d26c
+hydra.orange:       #e9946c
+hydra.purple:       #ff7eb6
+hydra.green:        #94dd8e
+hydra.red:          #e85a84
+hydra.blue:         #7eb7e6
+hydra.gray:         #16181d
+hydra.darkgray:     #191b20
+hydra.black:        #0f0f0f
+hydra.buttoncolor:  #7eb7e6
+
+dmenu.font: 		JetBrainsMono Nerd Font:style=Medium:size=12
+dmenu.normfg: 		#dfe0ea
+dmenu.normbg: 		#191b20
+dmenu.selfg: 		#191b20
+dmenu.selbg: 	    #7eb7e6
+dmenu.selhlfg: 		#ffffff
+dmenu.selhlbg: 		#7eb7e6
+menu.normhlfg: 	    #7eb7e6
+dmenu.normhlbg: 	#191b20
