@@ -1,9 +1,9 @@
-*.font: SFMono Nerd Font
+*.font: JetBrainsMono Nerd Font
 Xft.dpi: 96
 XTerm*renderFont: true
-XTerm*faceName: xft: SFMono Nerd Font
-XTerm*faceSize: 12
-Xcursor.theme: Fluent-dark
+XTerm*faceName: xft: JetBrainsMono Nerd Font
+XTerm*faceSize: 13
+Xcursor.theme: Bibata-Original-Ice
 Xcursor.size: 24
 
 *background:    #EFF1F5
@@ -25,11 +25,11 @@ Xcursor.size: 24
 *color7:        #ACB0BE
 *color15:       #BCC0CC
 
-st.font: SF Mono:style=Regular:size=12
-st.alpha: 0.95
+st.font: JetBrains Mono:style=Medium:size=12
+st.alpha: 0.80
 st.background:  #EFF1F5
 st.foreground:  #4C4F69
-st.st.color0:   #5C5F77
+st.color0:   	#5C5F77
 st.color8:      #6C6F85
 st.color1:      #D20F39
 st.color9:      #D20F39
@@ -46,7 +46,8 @@ st.color14:     #179299
 st.color7:      #ACB0BE
 st.color15:     #BCC0CC
 
-hydra.border:       #4C4F69
+hydra.alpha:        0xc5
+hydra.border:       #DF8E1D
 hydra.white:        #4C4F69
 hydra.lightblue:    #179299
 hydra.yellow:       #b68948
@@ -58,13 +59,14 @@ hydra.blue:         #1E66F5
 hydra.gray:         #BCC0CC
 hydra.darkgray:     #EFF1F5
 hydra.black:        #0f0f14
+hydra.buttoncolor:  #1E66F5
 
-dmenu.font: 		SFMono Nerd Font
+dmenu.font: 		JetBrainsMono Nerd Font:style=Medium:size=12
 dmenu.normfg: 		#4C4F69
 dmenu.normbg: 		#EFF1F5
 dmenu.selfg: 		#EFF1F5
 dmenu.selbg: 		#DF8E1D
 dmenu.selhlfg: 		#ffffff
-dmenu.selhlbg: 		#DF8E1D
-dmenu.normhlfg: 	#DF8E1D
+dmenu.selhlbg: 	    #DF8E1D	
+dmenu.normhlfg: 	#DF8E1D	
 dmenu.normhlbg: 	#EFF1F5

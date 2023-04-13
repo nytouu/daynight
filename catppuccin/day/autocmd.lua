@@ -1,17 +1,15 @@
--- vim.cmd('autocmd VimEnter * hi Normal guibg=NONE')
-
 vim.cmd('autocmd BufWritePost *.ms execute "!croffpdf %"| redraw!')
-vim.cmd('autocmd VimLeavePre * :set guicursor=n-c-v-r-i-ci-ve:ver25')
+vim.cmd("autocmd VimLeavePre * :set guicursor=n-c-v-r-i-ci-ve:ver25")
 
-vim.cmd('autocmd VimEnter * hi CurrentWordTwins guibg=#e6e9ef gui=none')
-vim.cmd('let g:vim_current_word#highlight_current_word = 0')
-vim.cmd('let g:vim_current_word#highlight_twins = 1')
-vim.cmd('let g:vim_current_word#highlight_delay = 0')
+vim.cmd("autocmd VimEnter * hi CurrentWordTwins guibg=#d2d4d9 gui=none")
+vim.cmd("let g:vim_current_word#highlight_current_word = 0")
+vim.cmd("let g:vim_current_word#highlight_twins = 1")
+vim.cmd("let g:vim_current_word#highlight_delay = 0")
 
 -- highlights
 -- vim.cmd('autocmd VimEnter * hi CursorLine guibg=#292e42')
--- vim.cmd('autocmd VimEnter * hi LineNr guifg=#414868')
 vim.cmd('autocmd VimEnter * hi ScrollView               guibg=#414868')
+vim.cmd('autocmd VimEnter * hi NotifyBackground         guibg=#d2d4d9')
 vim.cmd('autocmd CursorMoved * hi CursorLineNR          guifg=#1E66F5')
 vim.cmd('autocmd VimEnter * hi DiffAdd                  guifg=#40A02B guibg=none')
 vim.cmd('autocmd VimEnter * hi DiffChange               guifg=#DF8E1D guibg=none')
