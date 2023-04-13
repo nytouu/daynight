@@ -1,127 +1,101 @@
 #!/bin/sh
 
 FOLDER="$HOME/git/daynight"
+STATE=$(tail -n1 "$FOLDER"/status)
 
-# TODO find a better way to do this
-state=$(tail -n1 "$FOLDER"/status)
+case $STATE in
+    day)    NEW="night" ;;
+    night)  NEW="day" ;;
+esac
+
+rm_and_move(){
+    rm -f "$HOME"/scripts/bar-colors
+    rm -f "$HOME"/.config/dunst/dunstrc
+    # rm -f "$HOME"/.config/qutebrowser/config.py
+    rm -f "$HOME"/.config/x11/Xresources
+    # rm -f "$HOME"/.config/zathura/zathurarc
+    rm -f "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
+    rm -r "$HOME"/.config/nvim/lua/autocmd.lua
+    rm -f "$HOME"/.config/gtk-3.0/settings.ini
+    rm -f "$HOME"/.config/gtk-4.0/settings.ini
+    rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
+	# rm -f "$HOME"/.config/discocss/custom.css
+
+    cp "$FOLDER"/"$THEME"/"$NEW"/bar-colors "$HOME"/scripts/bar-colors
+    cp "$FOLDER"/"$THEME"/"$NEW"/dunstrc "$HOME"/.config/dunst/dunstrc
+    cp "$FOLDER"/"$THEME"/"$NEW"/Xresources "$HOME"/.config/x11/Xresources
+    cp "$FOLDER"/"$THEME"/"$NEW"/zathurarc "$HOME"/.config/zathura/zathurarc
+    cp "$FOLDER"/"$THEME"/"$NEW"/galaxyline.lua "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
+    cp "$FOLDER"/"$THEME"/"$NEW"/autocmd.lua "$HOME"/.config/nvim/lua/autocmd.lua
+    cp "$FOLDER"/"$THEME"/"$NEW"/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
+    cp "$FOLDER"/"$THEME"/"$NEW"/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
+    cp "$FOLDER"/"$THEME"/"$NEW"/xsettingsd.conf "$HOME"/.config/xsettingsd/xsettingsd.conf
+}
+
+kill_reload(){
+	xrdb merge "$HOME"/.config/x11/Xresources > /dev/null 2>&1
+    pkill hydrablocks && hydrablocks > /dev/null 2>&1 &
+    pkill dunst && dunst > /dev/null 2>&1 &
+    pkill xsettingsd && xsettingsd > /dev/null 2>&1 &
+    xdotool key super+ctrl+x
+    kill -USR1 $(pidof st)
+    # pkill lemonbar && lemonbar-dk &
+    # dkcmd reload
+    nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1
+}
 
 set_day(){
-    state=$(tail -n1 "$FOLDER"/status)
+    STATE=$(tail -n1 "$FOLDER"/status)
     THEME=$(tail -n1 "$FOLDER"/theme)
 
     echo day > "$FOLDER"/status
 
-    rm -f "$HOME"/scripts/bar-colors
-    rm -f "$HOME"/.config/dunst/dunstrc
-    # rm -f "$HOME"/.config/qutebrowser/config.py
-    rm -f "$HOME"/.config/x11/Xresources
-    # rm -f "$HOME"/.config/zathura/zathurarc
-    rm -f "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
-    rm -r "$HOME"/.config/nvim/lua/autocmd.lua
-    rm -f "$HOME"/.config/gtk-3.0/settings.ini
-    rm -f "$HOME"/.config/gtk-4.0/settings.ini
-    rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
-	# rm -f "$HOME"/.config/dk/dkrc
-	# rm -f "$HOME"/.config/discocss/custom.css
-	# rm -f "$HOME"/scripts/lemonbar-dk
-    cp "$FOLDER"/"$THEME"/day/bar-colors "$HOME"/scripts/bar-colors
-    cp "$FOLDER"/"$THEME"/day/dunstrc "$HOME"/.config/dunst/dunstrc
-    # cp "$FOLDER"/"$THEME"/day/config.py "$HOME"/.config/qutebrowser/config.py
-    cp "$FOLDER"/"$THEME"/day/Xresources "$HOME"/.config/x11/Xresources
-    cp "$FOLDER"/"$THEME"/day/zathurarc "$HOME"/.config/zathura/zathurarc
-    cp "$FOLDER"/"$THEME"/day/galaxyline.lua "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
-    cp "$FOLDER"/"$THEME"/day/autocmd.lua "$HOME"/.config/nvim/lua/autocmd.lua
-    cp "$FOLDER"/"$THEME"/day/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
-    cp "$FOLDER"/"$THEME"/day/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
-    cp "$FOLDER"/"$THEME"/day/xsettingsd.conf "$HOME"/.config/xsettingsd/xsettingsd.conf
-	# cp "$FOLDER"/"$THEME"/day/dkrc "$HOME"/.config/dk/dkrc
-	# cp "$FOLDER"/"$THEME"/day/custom.css "$HOME"/.config/discocss/custom.css
-	# cp "$FOLDER"/"$THEME"/day/lemonbar-dk "$HOME"/scripts/lemonbar-dk
+	rm_and_move
+
     case $THEME in
         catppuccin) sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/config/plugins/cat.lua ; \
-                    sed -i '2s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '3s/.*/require("plug.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
+                    sed -i '6s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '7s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
-        oxocarbon)  sed -i '2s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '3s/.*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+        oxocarbon)  sed -i '6s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '7s/.*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
         minimal)    sed -i '6s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '8s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
+                    sed -i '7s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
                     # sed -i '8s/.*/vim.cmd([[colorscheme catppuccin]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
     esac
 
-
-    xrdb merge "$HOME"/.config/x11/Xresources > /dev/null 2>&1
-    pkill hydrablocks && hydrablocks > /dev/null 2>&1 &
-    pkill dunst && dunst > /dev/null 2>&1 &
-    pkill xsettingsd && xsettingsd > /dev/null 2>&1 &
-    xdotool key super+ctrl+x
-    kill -USR1 $(pidof st)
-    # pkill lemonbar && lemonbar-dk &
-    # dkcmd reload
-    nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1
+	kill_reload
 
     notify-send -a daynight "changed to light theme"
+
     exit 0
 }
 
 set_night(){
-    state=$(tail -n1 "$FOLDER"/status)
+    STATE=$(tail -n1 "$FOLDER"/status)
     THEME=$(tail -n1 "$FOLDER"/theme)
 
     echo night > "$FOLDER"/status
+	rm_and_move
 
-    rm -f "$HOME"/scripts/bar-colors
-    rm -f "$HOME"/.config/dunst/dunstrc
-    # rm -f "$HOME"/.config/qutebrowser/config.py
-    rm -f "$HOME"/.config/x11/Xresources
-    # rm -f "$HOME"/.config/zathura/zathurarc
-    rm -f "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
-    rm -r "$HOME"/.config/nvim/lua/autocmd.lua
-    rm -f "$HOME"/.config/gtk-3.0/settings.ini
-    rm -f "$HOME"/.config/gtk-4.0/settings.ini
-    rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
-	# rm -f "$HOME"/.config/dk/dkrc
-	# rm -f "$HOME"/.config/discocss/custom.css
-	# rm -f "$HOME"/scripts/lemonbar-dk
-    cp "$FOLDER"/"$THEME"/night/bar-colors "$HOME"/scripts/bar-colors
-    cp "$FOLDER"/"$THEME"/night/dunstrc "$HOME"/.config/dunst/dunstrc
-    # cp "$FOLDER"/"$THEME"/night/config.py "$HOME"/.config/qutebrowser/config.py
-    cp "$FOLDER"/"$THEME"/night/Xresources "$HOME"/.config/x11/Xresources
-    cp "$FOLDER"/"$THEME"/night/zathurarc "$HOME"/.config/zathura/zathurarc
-    cp "$FOLDER"/"$THEME"/night/galaxyline.lua "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
-    cp "$FOLDER"/"$THEME"/night/autocmd.lua "$HOME"/.config/nvim/lua/autocmd.lua
-    cp "$FOLDER"/"$THEME"/night/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
-    cp "$FOLDER"/"$THEME"/night/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
-    cp "$FOLDER"/"$THEME"/night/xsettingsd.conf "$HOME"/.config/xsettingsd/xsettingsd.conf
-	# cp "$FOLDER"/"$THEME"/night/dkrc "$HOME"/.config/dk/dkrc
-	# cp "$FOLDER"/"$THEME"/night/custom.css "$HOME"/.config/discocss/custom.css
-	# cp "$FOLDER"/"$THEME"/night/lemonbar-dk "$HOME"/scripts/lemonbar-dk
     case $THEME in
         catppuccin) sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/config/plugins/cat.lua ; \
-                    sed -i '2s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '3s/.*/require("plug.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
+                    sed -i '6s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '7s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
-        oxocarbon)  sed -i '2s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '3s/.*/vim.cmd([[colorscheme oxocarbon]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
+        oxocarbon)  sed -i '6s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '7s/.*/vim.cmd([[colorscheme oxocarbon]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
-        minimal)    sed -i '2s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '8s/.*/vim.cmd([[colorscheme minimal]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
+        minimal)    sed -i '6s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
+                    sed -i '7s/.*/vim.cmd([[colorscheme minimal]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
     esac
 
-
-    xrdb merge "$HOME"/.config/x11/Xresources > /dev/null 2>&1
-    pkill hydrablocks && hydrablocks > /dev/null 2>&1 &
-    pkill dunst && dunst > /dev/null 2>&1 &
-    pkill xsettingsd && xsettingsd > /dev/null 2>&1 &
-    xdotool key super+ctrl+x
-    kill -USR1 $(pidof st)
-    # pkill lemonbar && lemonbar-dk &
-    # dkcmd reload
-    nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1
+	kill_reload
 
     notify-send -a daynight "changed to dark theme"
-    exit 0
+
+	exit 0
 }
 
 case $1 in
@@ -132,7 +106,7 @@ case $1 in
     *) echo "no args provided, switching style";;
 esac
 
-case $state in
+case $STATE in
     day) set_night ;;
     night) set_day ;;
     *) exit 1 ;;
