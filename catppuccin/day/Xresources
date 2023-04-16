@@ -59,7 +59,7 @@ hydra.blue:         #1E66F5
 hydra.gray:         #BCC0CC
 hydra.darkgray:     #EFF1F5
 hydra.black:        #0f0f14
-hydra.buttoncolor:  #1E66F5
+hydra.buttoncolor:  #DF8E1D
 
 dmenu.font: 		JetBrainsMono Nerd Font:style=Medium:size=12
 dmenu.normfg: 		#4C4F69
