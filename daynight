@@ -9,39 +9,51 @@ case $STATE in
 esac
 
 rm_and_move(){
-    rm -f "$HOME"/scripts/bar-colors
+    rm -f "$HOME"/.local/bin/bar-colors
     rm -f "$HOME"/.config/dunst/dunstrc
     # rm -f "$HOME"/.config/qutebrowser/config.py
-    rm -f "$HOME"/.config/x11/Xresources
+    rm -f "$HOME"/.Xresources
     # rm -f "$HOME"/.config/zathura/zathurarc
-    rm -f "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
-    rm -r "$HOME"/.config/nvim/lua/autocmd.lua
+    rm -f "$HOME"/.config/nvim/lua/plugins/ui/galaxyline.lua
+    rm -r "$HOME"/.config/nvim/lua/plugins/ui/colorscheme.lua
     rm -f "$HOME"/.config/gtk-3.0/settings.ini
     rm -f "$HOME"/.config/gtk-4.0/settings.ini
+    rm -f "$HOME"/.config/gtk-3.0/gtk.css
+    rm -f "$HOME"/.config/gtk-4.0/gtk.css
     rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
 	# rm -f "$HOME"/.config/discocss/custom.css
+    rm -f "$HOME"/pics/wallpaper.png
+    rm -f "$HOME"/.config/rofi/theme.rasi
 
-    cp "$FOLDER"/"$THEME"/"$NEW"/bar-colors "$HOME"/scripts/bar-colors
+    cp "$FOLDER"/"$THEME"/"$NEW"/bar-colors "$HOME"/.local/bin/bar-colors
     cp "$FOLDER"/"$THEME"/"$NEW"/dunstrc "$HOME"/.config/dunst/dunstrc
-    cp "$FOLDER"/"$THEME"/"$NEW"/Xresources "$HOME"/.config/x11/Xresources
-    cp "$FOLDER"/"$THEME"/"$NEW"/zathurarc "$HOME"/.config/zathura/zathurarc
-    cp "$FOLDER"/"$THEME"/"$NEW"/galaxyline.lua "$HOME"/.config/nvim/lua/config/plugins/galaxyline.lua
-    cp "$FOLDER"/"$THEME"/"$NEW"/autocmd.lua "$HOME"/.config/nvim/lua/autocmd.lua
+    cp "$FOLDER"/"$THEME"/"$NEW"/Xresources "$HOME"/.Xresources
+    # cp "$FOLDER"/"$THEME"/"$NEW"/zathurarc "$HOME"/.config/zathura/zathurarc
+    cp "$FOLDER"/"$THEME"/"$NEW"/galaxyline.lua "$HOME"/.config/nvim/lua/plugins/ui/galaxyline.lua
+    cp "$FOLDER"/"$THEME"/"$NEW"/colorscheme.lua "$HOME"/.config/nvim/lua/plugins/ui/colorscheme.lua
     cp "$FOLDER"/"$THEME"/"$NEW"/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
     cp "$FOLDER"/"$THEME"/"$NEW"/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
+    cp "$FOLDER"/"$THEME"/"$NEW"/gtk.css "$HOME"/.config/gtk-3.0/gtk.css
+    cp "$FOLDER"/"$THEME"/"$NEW"/gtk.css "$HOME"/.config/gtk-4.0/gtk.css
     cp "$FOLDER"/"$THEME"/"$NEW"/xsettingsd.conf "$HOME"/.config/xsettingsd/xsettingsd.conf
+    cp "$FOLDER"/"$THEME"/"$NEW"/wallpaper.png "$HOME"/pics/wallpaper.png
+    cp "$FOLDER"/"$THEME"/"$NEW"/theme.rasi "$HOME"/.config/rofi/theme.rasi
 }
 
 kill_reload(){
-	xrdb merge "$HOME"/.config/x11/Xresources > /dev/null 2>&1
+	xrdb merge "$HOME"/.Xresources > /dev/null 2>&1
     pkill hydrablocks && hydrablocks > /dev/null 2>&1 &
     pkill dunst && dunst > /dev/null 2>&1 &
     pkill xsettingsd && xsettingsd > /dev/null 2>&1 &
     xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
+    kill -HUP $(pidof hydra)
+    nitrogen --set-scaled "$HOME"/pics/wallpaper.png
+    convert -scale 10% -blur 0x2.5 -resize 1000% "$HOME"/pics/wallpaper.png "$HOME"/pics/wallpaper_blur.png
+    betterlockscreen -u "$HOME"/pics/wallpaper.png &
     # pkill lemonbar && lemonbar-dk &
     # dkcmd reload
-    nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1
+    nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 &
 }
 
 set_day(){
@@ -57,12 +69,14 @@ set_day(){
                     sed -i '6s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
                     sed -i '7s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
-        oxocarbon)  sed -i '6s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '7s/.*/vim.cmd[[colorscheme oxocarbon]]/' "$HOME"/.config/nvim/lua/settings.lua ;;
+        oxocarbon)  sed -i '36s/393939/dddddd/' "$HOME"/.config/nvim/lua/plugins/ui/stcursorword.lua ; \
+                    sed -i '107s/111111/c2c2c2/' "$HOME"/.config/compfy.conf ;;
 
         minimal)    sed -i '6s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
                     sed -i '7s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
-                    # sed -i '8s/.*/vim.cmd([[colorscheme catppuccin]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
+
+        melange)    sed -i '36s/403a36/e9e1db/' "$HOME"/.config/nvim/lua/plugins/stcursorword.lua ; \
+                    sed -i '107s/111111/c2c2c2/' "$HOME"/.config/compfy.conf ;;
     esac
 
 	kill_reload
@@ -80,15 +94,18 @@ set_night(){
 	rm_and_move
 
     case $THEME in
-        catppuccin) sed -i 's/mocha/latte/' "$HOME"/.config/nvim/lua/config/plugins/cat.lua ; \
+        catppuccin) sed -i 's/latte/mocha/' "$HOME"/.config/nvim/lua/config/plugins/cat.lua ; \
                     sed -i '6s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
                     sed -i '7s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
-        oxocarbon)  sed -i '6s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
-                    sed -i '7s/.*/vim.cmd([[colorscheme oxocarbon]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
+        oxocarbon)  sed -i '36s/dddddd/393939/' "$HOME"/.config/nvim/lua/plugins/ui/stcursorword.lua ; \
+                    sed -i '107s/c2c2c2/111111/' "$HOME"/.config/compfy.conf ;;
 
         minimal)    sed -i '6s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
                     sed -i '7s/.*/vim.cmd([[colorscheme minimal]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
+
+        melange)    sed -i '36s/e9e1db/403a36/' "$HOME"/.config/nvim/lua/plugins/stcursorword.lua ; \
+                    sed -i '107s/c2c2c2/111111/' "$HOME"/.config/compfy.conf ;;
     esac
 
 	kill_reload
@@ -103,6 +120,7 @@ case $1 in
     --tokyo)    echo tokyonight     > "$FOLDER"/theme && set_night && exit 0 ;;
     --cat)      echo catppuccin     > "$FOLDER"/theme && set_night && exit 0 ;;
     --minimal)  echo minimal        > "$FOLDER"/theme && set_night && exit 0 ;;
+    --melange)  echo melange        > "$FOLDER"/theme && set_night && exit 0 ;;
     *) echo "no args provided, switching style";;
 esac
 

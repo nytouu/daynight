@@ -1,4 +1,4 @@
-*.font: JetBrainsMono Nerd Font
+*.font: JetBrains Mono
 Xft.dpi: 96
 XTerm*renderFont: true
 XTerm*faceName: xft: JetBrainsMono Nerd Font
@@ -25,7 +25,7 @@ Xcursor.size: 24
 *color7:        #BAC2DE
 *color15:       #A6ADC8
 
-st.font: JetBrains Mono:style=Medium:size=12
+st.font: JetBrains Mono:style=Medium:size=11
 st.alpha: 0.90
 st.background:    #1E1E2E
 st.foreground:    #CDD6F4
@@ -47,7 +47,7 @@ st.color7:        #BAC2DE
 st.color15:       #A6ADC8
 
 hydra.alpha:        0xc5
-hydra.border:       #F7CEAF
+hydra.border:       #656464
 hydra.white:        #CDD6F4
 hydra.lightblue:    #94E2D5
 hydra.yellow:       #F9E2AF
@@ -61,7 +61,7 @@ hydra.darkgray:     #1E1E2E
 hydra.black:        #0f0f14
 hydra.buttoncolor:  #F7CEAF
 
-dmenu.font: 		JetBrainsMono Nerd Font:style=Medium:size=12
+dmenu.font: 		Torus:style=Medium:size=12
 dmenu.normfg: 		#CDD6F4
 dmenu.normbg: 		#1E1E2E
 dmenu.selfg: 		#1E1E2E

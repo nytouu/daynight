@@ -1,0 +1,71 @@
+*.font: Torus Pro
+Xft.dpi: 96
+XTerm*renderFont: true
+XTerm*faceName: xft: IBM Plex Mono
+XTerm*faceSize: 13
+Xcursor.theme: Bibata-Original-Ice
+Xcursor.size: 24
+
+*background: #292522
+*foreground: #ECE1D7
+*color0: #34302C
+*color1: #BD8183
+*color2: #78997A
+*color3: #E49B5D
+*color4: #7F91B2
+*color5: #B380B0
+*color6: #7B9695
+*color7: #C1A78E
+*color8: #867462
+*color9: #D47766
+*color10: #85B695
+*color11: #EBC06D
+*color12: #A3A9CE
+*color13: #CF9BC2
+*color14: #89B3B6
+*color15: #ECE1D7
+
+st.font: IBM Plex Mono:style=Medium:size=10
+st.alpha: 1.00
+st.background: #292522
+st.foreground: #ECE1D7
+st.color0: #34302C
+st.color1: #BD8183
+st.color2: #78997A
+st.color3: #E49B5D
+st.color4: #7F91B2
+st.color5: #B380B0
+st.color6: #7B9695
+st.color7: #C1A78E
+st.color8: #867462
+st.color9: #D47766
+st.color10: #85B695
+st.color11: #EBC06D
+st.color12: #A3A9CE
+st.color13: #CF9BC2
+st.color14: #89B3B6
+st.color15: #ECE1D7
+
+hydra.border: #867462
+hydra.white: #ECE1D7
+hydra.red: #D47766
+hydra.orange: #E49B5D
+hydra.yellow: #EBC06D
+hydra.green: #85B695
+hydra.blue: #A3A9CE
+hydra.purple: #CF9BC2
+hydra.lightblue: #89B3B6
+hydra.darkgray: #000000
+hydra.gray: #C1A78E
+hydra.black: #000000
+hydra.buttoncolor: #E49B5D
+
+dmenu.font: Torus Pro:size=12
+dmenu.normbg: #000000
+dmenu.normfg: #ECE1D7
+dmenu.selbg: #EBC06D
+dmenu.selfg: #000000
+dmenu.selhlbg: #EBC06D
+dmenu.selhlfg: #ECE1D7
+dmenu.normhlbg: #000000
+dmenu.normhlfg: #EBC06D

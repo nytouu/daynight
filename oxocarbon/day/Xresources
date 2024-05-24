@@ -1,10 +1,12 @@
-*.font: SFMono Nerd Font
+*.font: SF Pro Display
 Xft.dpi: 96
 XTerm*renderFont: true
-XTerm*faceName: xft: SFMono Nerd Font
+XTerm*faceName: xft: IBM Plex Mono
 XTerm*faceSize: 13
 Xcursor.theme: Bibata-Original-Ice
 Xcursor.size: 24
+Xft.hinting:    true
+Xft.hintstyle:  hintfull
 
 *background:    #ECEFF1
 *foreground:    #37474F
@@ -25,11 +27,11 @@ Xcursor.size: 24
 *color7:        #525252
 *color15:       #525252
 
-st.font: SF Mono:style=Medium:size=13
-st.alpha: 0.90
-st.background:    #ECEFF1
+st.font: Liga SFMono Nerd Font:style=Medium:size=11:autohint=true
+st.alpha: 1.00
+st.background:    #ffffff
 st.foreground:    #37474F
-st.color0:        #262626
+st.color0:        #ECEFF1
 st.color8:        #393939
 st.color1:        #ee5396
 st.color9:        #ee5396
@@ -57,9 +59,10 @@ hydra.red:          #ee5396
 hydra.blue:         #82cfff
 hydra.gray:         #393939
 hydra.darkgray:     #ECEFF1
-hydra.black:        #0f0f0f
+hydra.black:        #ECEFF1
+hydra.buttoncolor:  #FFAB91
 
-dmenu.font: 		SFMono Nerd Font:style=Medium:size=12
+dmenu.font: 		SF Pro Display:style=Medium:size=13
 dmenu.normfg: 		#37474F
 dmenu.normbg: 		#ECEFF1
 dmenu.selfg: 		#ECEFF1

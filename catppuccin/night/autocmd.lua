@@ -71,6 +71,6 @@ vim.cmd('autocmd BufEnter * hi CmpItemKindColor         guifg=#181825 guibg=#94E
 vim.cmd('autocmd BufEnter * hi CmpItemKindTypeParameter guifg=#181825 guibg=#94E2D5')
 
 vim.cmd('autocmd BufEnter * hi CmpItemAbbrDeprecated    guifg=#7E8294 guibg=none')
-vim.cmd('autocmd BufEnter * hi CmpItemAbbrMatch         guifg=#CDD6F4 guibg=none')
-vim.cmd('autocmd BufEnter * hi CmpItemAbbrMatchFuzzy    guifg=#CDD6F4 guibg=none')
+vim.cmd('autocmd BufEnter * hi CmpItemAbbrMatch         guifg=#94E2D5 guibg=none')
+vim.cmd('autocmd BufEnter * hi CmpItemAbbrMatchFuzzy    guifg=#f7ceaf guibg=none')
 vim.cmd('autocmd BufEnter * hi CmpItemMenu              guifg=#F5C2E7 guibg=none')

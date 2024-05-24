@@ -1,0 +1,28 @@
+/**
+ * @name Catppuccin
+ * @author Catppuccin
+ * @version 0.0.8
+ * @description 🎮 Soothing pastel theme for Discord
+ * @website https://github.com/catppuccin
+ * @source https://github.com/catppuccin/discord
+ **/
+
+* {
+    font-family: Torus Pro;
+}
+
+.theme-dark {
+  --background-primary: #161616;
+  --background-primary-alt: #202020;
+  --background-secondary: #262626;
+  --background-secondary-alt: #303030;
+  --background-tertiary: #101010;
+}
+
+.theme-light {
+  --background-primary: #f3f4f644;
+  --background-primary-alt: #eeeff244;
+  --background-secondary: #e5e7eb44;
+  --background-secondary-alt: #d1d5db44;
+  --background-tertiary: #dfe2e744;
+}

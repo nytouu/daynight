@@ -2,15 +2,29 @@
 
 # colors for status2d
 
-# dark mode
-red="^b#ee5396^"
-redfg="^c#ee5396^"
-blue="^b#82cfff^"
-lightblue="^b#3ddbd9^"
-pink="^b#ff7eb6^"
-lime="^b#73daca^"
-orange="^b#FFAB91^"
-green="^b#42be65^"
-yellow="^b#dfb71d^"
-gray="^b#37474F^"
-bg="^c#ECEFF1^"
+FG_RED="^c#EE5396^"
+BG_RED="^b#EE5396^"
+
+FG_BLUE="^c#82CFFF^"
+BG_BLUE="^b#82CFFF^"
+
+FG_LIGHTBLUE="^c#3DDBD9^"
+BG_LIGHTBLUE="^b#3DDBD9^"
+
+BG_PINK="^b#FF7EB6^"
+FG_PINK="^c#FF7EB6^"
+
+BG_ORANGE="^b#FFAB91^"
+FG_ORANGE="^c#FFAB91^"
+
+BG_GREEN="^b#42BE65^"
+FG_GREEN="^c#42BE65^"
+
+BG_YELLOW="^b#dfb71d^"
+FG_YELLOW="^c#dfb71d^"
+
+BG_GRAY="^b#DDE1E6^"
+FG_GRAY="^c#DDE1E6^"
+
+BG_DARK="^b#ECEFF1^"
+FG_DARK="^c#ECEFF1^"
