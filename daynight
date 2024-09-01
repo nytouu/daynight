@@ -9,8 +9,8 @@ case $STATE in
 esac
 
 rm_and_move(){
-    rm -f "$HOME"/.local/bin/bar-colors
-    rm -f "$HOME"/.config/dunst/dunstrc
+    # rm -f "$HOME"/.local/bin/bar-colors
+    # rm -f "$HOME"/.config/dunst/dunstrc
     # rm -f "$HOME"/.config/qutebrowser/config.py
     rm -f "$HOME"/.Xresources
     # rm -f "$HOME"/.config/zathura/zathurarc
@@ -25,8 +25,8 @@ rm_and_move(){
     rm -f "$HOME"/pics/wallpaper.png
     rm -f "$HOME"/.config/rofi/theme.rasi
 
-    cp "$FOLDER"/"$THEME"/"$NEW"/bar-colors "$HOME"/.local/bin/bar-colors
-    cp "$FOLDER"/"$THEME"/"$NEW"/dunstrc "$HOME"/.config/dunst/dunstrc
+    # cp "$FOLDER"/"$THEME"/"$NEW"/bar-colors "$HOME"/.local/bin/bar-colors
+    # cp "$FOLDER"/"$THEME"/"$NEW"/dunstrc "$HOME"/.config/dunst/dunstrc
     cp "$FOLDER"/"$THEME"/"$NEW"/Xresources "$HOME"/.Xresources
     # cp "$FOLDER"/"$THEME"/"$NEW"/zathurarc "$HOME"/.config/zathura/zathurarc
     cp "$FOLDER"/"$THEME"/"$NEW"/galaxyline.lua "$HOME"/.config/nvim/lua/plugins/ui/galaxyline.lua
@@ -42,18 +42,20 @@ rm_and_move(){
 
 kill_reload(){
 	xrdb merge "$HOME"/.Xresources > /dev/null 2>&1
-    pkill hydrablocks && hydrablocks > /dev/null 2>&1 &
-    pkill dunst && dunst > /dev/null 2>&1 &
+    # pkill hydrablocks && hydrablocks > /dev/null 2>&1 &
+    # pkill dunst && dunst > /dev/null 1>&1 &
     pkill xsettingsd && xsettingsd > /dev/null 2>&1 &
-    xdotool key super+ctrl+x
+    # xdotool key super+ctrl+x
     kill -USR1 $(pidof st)
-    kill -HUP $(pidof hydra)
-    nitrogen --set-scaled "$HOME"/pics/wallpaper.png
-    convert -scale 10% -blur 0x2.5 -resize 1000% "$HOME"/pics/wallpaper.png "$HOME"/pics/wallpaper_blur.png
-    betterlockscreen -u "$HOME"/pics/wallpaper.png &
+    pidof tabbed | xargs kill -s USR1
+    # kill -HUP $(pidof hydra)
+    # nitrogen --set-scaled "$HOME"/pics/wallpaper.png
+    # convert -scale 10% -blur 0x2.5 -resize 1000% "$HOME"/pics/wallpaper.png "$HOME"/pics/wallpaper_blur.png
+    # betterlockscreen -u "$HOME"/pics/wallpaper.png &
     # pkill lemonbar && lemonbar-dk &
     # dkcmd reload
     nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 &
+    sleep 0.1 && xdotool key super+ctrl+r
 }
 
 set_day(){
@@ -69,17 +71,23 @@ set_day(){
                     sed -i '6s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
                     sed -i '7s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
-        oxocarbon)  sed -i '36s/393939/dddddd/' "$HOME"/.config/nvim/lua/plugins/ui/stcursorword.lua ; \
-                    sed -i '107s/111111/c2c2c2/' "$HOME"/.config/compfy.conf ;;
+        oxocarbon)  sed -i '38s/393939/dddddd/' "$HOME"/.config/nvim/lua/plugins/ui/stcursorword.lua ; \
+                    sed -i '8s/111111/c2c2c2/' "$HOME"/.config/picom.conf ;;
+
+        adwaita)    sed -i '38s/393939/dddddd/' "$HOME"/.config/nvim/lua/plugins/ui/stcursorword.lua ; \
+                    sed -i '8s/111111/c2c2c2/' "$HOME"/.config/picom.conf ; \
+                    sed -i '4s/dark/light/' "$HOME"/.config/awesome/theme.lua ;; 
 
         minimal)    sed -i '6s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
                     sed -i '7s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
-        melange)    sed -i '36s/403a36/e9e1db/' "$HOME"/.config/nvim/lua/plugins/stcursorword.lua ; \
-                    sed -i '107s/111111/c2c2c2/' "$HOME"/.config/compfy.conf ;;
+        melange)    sed -i '38s/403a36/e9e1db/' "$HOME"/.config/nvim/lua/plugins/stcursorword.lua ; \
+                    sed -i '8s/111111/c2c2c2/' "$HOME"/.config/picom.conf ;;
     esac
 
 	kill_reload
+
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
 
     notify-send -a daynight "changed to light theme"
 
@@ -91,6 +99,7 @@ set_night(){
     THEME=$(tail -n1 "$FOLDER"/theme)
 
     echo night > "$FOLDER"/status
+
 	rm_and_move
 
     case $THEME in
@@ -98,17 +107,23 @@ set_night(){
                     sed -i '6s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
                     sed -i '7s/.*/require("config.plugins.cat")/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
-        oxocarbon)  sed -i '36s/dddddd/393939/' "$HOME"/.config/nvim/lua/plugins/ui/stcursorword.lua ; \
-                    sed -i '107s/c2c2c2/111111/' "$HOME"/.config/compfy.conf ;;
+        oxocarbon)  sed -i '38s/dddddd/393939/' "$HOME"/.config/nvim/lua/plugins/ui/stcursorword.lua ; \
+                    sed -i '8s/c2c2c2/111111/' "$HOME"/.config/picom.conf ;;
+
+        adwaita)    sed -i '38s/dddddd/393939/' "$HOME"/.config/nvim/lua/plugins/ui/stcursorword.lua ; \
+                    sed -i '8s/c2c2c2/111111/' "$HOME"/.config/picom.conf ; \
+                    sed -i '4s/light/dark/' "$HOME"/.config/awesome/theme.lua ;;
 
         minimal)    sed -i '6s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
                     sed -i '7s/.*/vim.cmd([[colorscheme minimal]])/' "$HOME"/.config/nvim/lua/settings.lua ;;
 
-        melange)    sed -i '36s/e9e1db/403a36/' "$HOME"/.config/nvim/lua/plugins/stcursorword.lua ; \
-                    sed -i '107s/c2c2c2/111111/' "$HOME"/.config/compfy.conf ;;
+        melange)    sed -i '38s/e9e1db/403a36/' "$HOME"/.config/nvim/lua/plugins/stcursorword.lua ; \
+                    sed -i '8s/c2c2c2/111111/' "$HOME"/.config/picom.conf ;;
     esac
 
 	kill_reload
+
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
     notify-send -a daynight "changed to dark theme"
 
@@ -121,6 +136,7 @@ case $1 in
     --cat)      echo catppuccin     > "$FOLDER"/theme && set_night && exit 0 ;;
     --minimal)  echo minimal        > "$FOLDER"/theme && set_night && exit 0 ;;
     --melange)  echo melange        > "$FOLDER"/theme && set_night && exit 0 ;;
+    --adwaita)  echo adwaita        > "$FOLDER"/theme && set_night && exit 0 ;;
     *) echo "no args provided, switching style";;
 esac
 

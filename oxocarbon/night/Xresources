@@ -64,10 +64,10 @@ hydra.buttoncolor:  #FFAB91
 
 dmenu.font: 		SF Pro Display:style=Medium:size=12
 dmenu.normfg: 		#dde1e6
-dmenu.normbg: 		#161616
-dmenu.selfg: 		#161616
+dmenu.normbg: 		#000000
+dmenu.selfg: 		#000000
 dmenu.selbg: 		#ee5396
 dmenu.selhlfg: 		#ffffff
 dmenu.selhlbg: 		#ee5396
 dmenu.normhlfg: 	#ee5396
-dmenu.normhlbg: 	#161616
+dmenu.normhlbg: 	#000000

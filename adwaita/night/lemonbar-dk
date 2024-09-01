@@ -1,0 +1,243 @@
+#!/bin/bash
+# shellcheck disable=SC2059,SC2064,SC2086
+
+# simple lightweight lemonbar script for use with dk
+
+
+bg="#161616"
+fg="#dde1e6"
+color1="#ee5396"
+color2="#42be65"
+color3="#F9E2AF"
+color4="#82cfff"
+color5="#ff7eb6"
+color6="#3ddbd9"
+color7="#FFAB91"
+under="#525252"
+underline=2
+separator=" "
+
+# xft fonts
+font0="nonicons:pixelsize=14"
+font1="SFMono Nerd Font:pixelsize=14"
+font2=""
+font3=""
+
+fifo="/tmp/bar.fifo"
+
+# mimic dwm style layout symbols
+typeset -A layouts=(
+[tile]="[]="
+[mono]="[M]"
+[none]="><>"
+[grid]="###"
+[spiral]="(@)"
+[dwindle]="[\\]"
+[tstack]="F^F"
+)
+
+clock()
+{
+	if [[ $1 ]]; then
+		while :; do
+            printf 'T%s\n' "%{F$bg}%{B$color4}%{A1:$1:}  $(date '+%H:%M') %{A}%{F-}%{B-}"
+			sleep 60
+		done
+	else
+		while :; do
+            printf 'T%s\n' "%{F$bg}%{B$color4}  $(date '+%H:%M') %{F-}%{B-}"
+			sleep 60
+		done
+	fi
+}
+
+notif()
+{
+	if [[ $1 ]]; then
+		while :; do
+            state=$(dunstctl is-paused)
+
+            case $state in
+                "false" ) text="" ;;
+                "true" ) text="" ;;
+            esac
+            printf 'N%s\n' "%{F$bg}%{B$color3}%{A1:$1:} $text %{A}%{F-}%{B-}"
+			sleep 0.2
+		done
+	else
+		while :; do
+            state=$(dunstctl is-paused)
+
+            case $state in
+                "false" ) text="" ;;
+                "true" ) text="" ;;
+            esac
+            printf 'N%s\n' "%{F$bg}%{B$color3} $text %{F-}%{B-}"
+			sleep 0.2
+		done
+	fi
+}
+
+calendar()
+{
+	if [[ $1 ]]; then
+		while :; do
+            printf 'C%s\n' "%{F$bg}%{B$color6}%{A1:$1:}  $(date '+%a %d %b') %{A}%{F-}%{B-}"
+			sleep 1d
+		done
+	else
+		while :; do
+            printf 'C%s\n' "%{F$bg}%{B$color6}  $(date '+%a %d %b') %{F-}%{B-}"
+			sleep 1d
+		done
+	fi
+}
+
+battery()
+{
+	if [[ $1 ]]; then
+		while :; do
+			printf 'B%s\n' "%{A1:$1:} $(acpi --battery 2>/dev/null | cut -d, -f2 | tr -d '[:space:]') %{A}"
+			sleep 10
+		done
+	else
+		while :; do
+			printf 'B%s\n' " $(acpi --battery 2>/dev/null | cut -d, -f2 | tr -d '[:space:]') "
+			sleep 10
+		done
+	fi
+}
+
+volume()
+{
+	if [[ $1 ]]; then
+		while :; do
+			printf 'V%s\n' "%{F$bg}%{B$color5}%{A1:$1:} 墳 $(pamixer --get-volume-human) %{A}%{F-}%{B-}"
+			sleep 0.2
+		done
+	else
+		while :; do
+			printf 'V%s\n' "%{F$bg}%{B$color5} 墳 $(pamixer --get-volume-human) %{F-}%{B-}"
+			sleep 0.2
+		done
+	fi
+}
+
+launcher()
+{
+	if [[ $1 ]]; then
+        while :; do
+            printf 'P%s\n' "%{A1:$1:} גּ %{A}"
+            sleep 10000
+        done
+    else
+        while :; do
+            printf 'P%s\n' " גּ"
+            sleep 10000
+        done
+    fi
+}
+
+song()
+{
+	if [[ $1 ]]; then
+		while :; do
+            state="$(mpc | sed '2!d ; s/ .*//')"
+            case $state in
+                "[playing]") icon="%{F$bg}%{B$color1} " ;;
+                "[paused]") icon="%{F$bg}%{B$color1} " ;;
+                *) icon="" ;;
+            esac
+            text="$(tail -n1 /tmp/mpcscroll | sed 's/^/ /')"
+			printf 'S%s\n' "%{A1:$1:} $icon $text %{A}%{F-}%{B-}"
+			sleep 1
+		done
+	else
+		while :; do
+            state="$(mpc | sed '2!d ; s/ .*//')"
+            case $state in
+                "[playing]") icon="%{F$bg}%{B$color1} " ;;
+                "[paused]") icon="%{F$bg}%{B$color1} " ;;
+                *) icon="" ;;
+            esac
+            text="$(tail -n1 /tmp/mpcscroll | sed 's/^/ /')"
+			printf 'S%s\n' " $icon $text %{F-}%{B-}"
+			sleep 1
+		done
+	fi
+}
+
+parsefifo()
+{
+	typeset f='' b='' u='' wm='' n='' launch='' time='' song='' vol='' cal='' layout='' s="$separator"
+
+	while read -r line; do
+		case $line in
+			T*) time="${line#?}" ;;
+			P*) launch="${line#?}" ;;
+            S*) song="${line#?}" ;;
+            N*) n="${line#?}" ;;
+			V*) vol="${line#?}" ;;
+            C*) cal="${line#?}" ;;
+			L*) l="${line#?}"; layout="${layouts[$l]}" ;;
+			W*)
+				wm='' IFS=':' # set the internal field separator to ':'
+				set -- ${line#?}  # split the line into arguments ($@) based on the field separator
+				for item in "$@"; do
+					name=${item#?}
+					case $item in
+						A) f="$color2" b="$bg" u="$color2" ;; # occupied   - focused
+						A) f="$color5" b="$bg" u="$color5" ;; # occupied   - focused
+						A) f="$color1" b="$bg" u="$color1" ;; # occupied   - focused
+						A) f="$color7" b="$bg" u="$color7" ;; # occupied   - focused
+						A) f="$color6" b="$bg" u="$color6" ;; # occupied   - focused
+						Aﭮ) f="$color4" b="$bg" u="$color4" ;; # occupied   - focused
+						A) f="$color3" b="$bg" u="$color3" ;; # occupied   - focused
+						I) f="$color2" b="$bg" u="$fg"     ;; # occupied   - focused
+						I) f="$color5" b="$bg" u="$fg"     ;; # occupied   - focused
+						I) f="$color1" b="$bg" u="$fg"     ;; # occupied   - focused
+						I) f="$color7" b="$bg" u="$fg"     ;; # occupied   - focused
+						I) f="$color6" b="$bg" u="$fg"     ;; # occupied   - focused
+						Iﭮ) f="$color4" b="$bg" u="$fg"     ;; # occupied   - focused
+						I) f="$color3" b="$bg" u="$fg"     ;; # occupied   - focused
+						a*) f="$fg"     b="$bg" u="$under"  ;; # occupied   - unfocused
+						i*) f="$fg"     b="$bg" u="$bg"     ;; # unoccupied - unfocused
+					esac
+					wm="$wm%{F$f}%{B$b}%{+u}%{U$u}%{A:dkcmd ws $name:} $name %{A}%{-u}%{B-}%{F-}"
+				done
+				;;
+		esac
+		printf "%s\n" "%{l}$launch $layout%{c}$wm%{r}${s}${song}${s}${vol}${s}${n}${s}${cal}${s}${time}${s}"
+	done
+}
+
+
+# kill the process and cleanup if we exit or get killed
+trap "trap - TERM; kill 0; rm -f '$fifo'" INT TERM QUIT EXIT
+
+# make the fifo
+[ -e "$fifo" ] && rm "$fifo"
+mkfifo "$fifo"
+
+
+# here we dump info into the FIFO, order does not matter things are parsed
+# out using the first character of the line. Click commands for left button
+# can be added by passing an argument containing the command (like volume below)
+launcher 'dmenu_run' > "$fifo" &
+clock '' > "$fifo" &
+# battery '' > "$fifo" &
+volume 'st -e pulsemixer' > "$fifo" &
+calendar 'st -e calcurse' > "$fifo" &
+song 'mpc toggle > /dev/null' > "$fifo" &
+notif 'dunstctl set-paused toggle' > "$fifo" &
+dkcmd status type=bar > "$fifo" &
+
+
+# run the pipeline
+if [[ $1 == '-b' ]]; then
+	parsefifo < "$fifo" | lemonbar -o -3 -g 1920x32 -b -a 32 -u $underline -B "$bg" -F "$fg" -f "$font0" -f "$font1" -f "$font2" -f "$font3" | sh
+else
+	parsefifo < "$fifo" | lemonbar -o -3 -g 1920x32 -a 32 -u $underline -B "$bg" -F "$fg" -f "$font0" -f "$font1" -f "$font2" -f "$font3" | sh
+fi
+
+# vim:ft=sh:fdm=marker:fmr={,}
