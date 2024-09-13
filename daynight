@@ -22,39 +22,41 @@ rm_and_move(){
     rm -f "$HOME"/.config/gtk-4.0/gtk.css
     rm -f "$HOME"/.config/xsettingsd/xsettingsd.conf
 	# rm -f "$HOME"/.config/discocss/custom.css
-    rm -f "$HOME"/pics/wallpaper.png
+    # rm -f "$HOME"/pics/wallpaper.png
     rm -f "$HOME"/.config/rofi/theme.rasi
 
-    # cp "$FOLDER"/"$THEME"/"$NEW"/bar-colors "$HOME"/.local/bin/bar-colors
-    # cp "$FOLDER"/"$THEME"/"$NEW"/dunstrc "$HOME"/.config/dunst/dunstrc
-    cp "$FOLDER"/"$THEME"/"$NEW"/Xresources "$HOME"/.Xresources
-    # cp "$FOLDER"/"$THEME"/"$NEW"/zathurarc "$HOME"/.config/zathura/zathurarc
-    cp "$FOLDER"/"$THEME"/"$NEW"/galaxyline.lua "$HOME"/.config/nvim/lua/plugins/ui/galaxyline.lua
-    cp "$FOLDER"/"$THEME"/"$NEW"/colorscheme.lua "$HOME"/.config/nvim/lua/plugins/ui/colorscheme.lua
-    cp "$FOLDER"/"$THEME"/"$NEW"/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
-    cp "$FOLDER"/"$THEME"/"$NEW"/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
-    cp "$FOLDER"/"$THEME"/"$NEW"/gtk.css "$HOME"/.config/gtk-3.0/gtk.css
-    cp "$FOLDER"/"$THEME"/"$NEW"/gtk.css "$HOME"/.config/gtk-4.0/gtk.css
-    cp "$FOLDER"/"$THEME"/"$NEW"/xsettingsd.conf "$HOME"/.config/xsettingsd/xsettingsd.conf
-    cp "$FOLDER"/"$THEME"/"$NEW"/wallpaper.png "$HOME"/pics/wallpaper.png
-    cp "$FOLDER"/"$THEME"/"$NEW"/theme.rasi "$HOME"/.config/rofi/theme.rasi
+    # ln -s "$FOLDER"/"$THEME"/"$NEW"/bar-colors "$HOME"/.local/bin/bar-colors
+    # ln -s "$FOLDER"/"$THEME"/"$NEW"/dunstrc "$HOME"/.config/dunst/dunstrc
+    ln -s "$FOLDER"/"$THEME"/"$NEW"/Xresources "$HOME"/.Xresources
+    # ln -s "$FOLDER"/"$THEME"/"$NEW"/zathurarc "$HOME"/.config/zathura/zathurarc
+    ln -s "$FOLDER"/"$THEME"/"$NEW"/galaxyline.lua "$HOME"/.config/nvim/lua/plugins/ui/galaxyline.lua
+    ln -s "$FOLDER"/"$THEME"/"$NEW"/colorscheme.lua "$HOME"/.config/nvim/lua/plugins/ui/colorscheme.lua
+    ln -s "$FOLDER"/"$THEME"/"$NEW"/gtk-3.0-settings.ini "$HOME"/.config/gtk-3.0/settings.ini
+    ln -s "$FOLDER"/"$THEME"/"$NEW"/gtk-4.0-settings.ini "$HOME"/.config/gtk-4.0/settings.ini
+    ln -s "$FOLDER"/"$THEME"/"$NEW"/gtk.css "$HOME"/.config/gtk-3.0/gtk.css
+    ln -s "$FOLDER"/"$THEME"/"$NEW"/gtk.css "$HOME"/.config/gtk-4.0/gtk.css
+    ln -s "$FOLDER"/"$THEME"/"$NEW"/xsettingsd.conf "$HOME"/.config/xsettingsd/xsettingsd.conf
+    # ln -s "$FOLDER"/"$THEME"/"$NEW"/wallpaper.png "$HOME"/pics/wallpaper.png
+    ln -s "$FOLDER"/"$THEME"/"$NEW"/theme.rasi "$HOME"/.config/rofi/theme.rasi
 }
 
 kill_reload(){
 	xrdb merge "$HOME"/.Xresources > /dev/null 2>&1
     # pkill hydrablocks && hydrablocks > /dev/null 2>&1 &
     # pkill dunst && dunst > /dev/null 1>&1 &
+    kill -HUP xsettingsd  > /dev/null 2>&1 &
     pkill xsettingsd && xsettingsd > /dev/null 2>&1 &
     # xdotool key super+ctrl+x
-    kill -USR1 $(pidof st)
-    pidof tabbed | xargs kill -s USR1
+    kill -USR1 $(pidof st) > /dev/null 2>&1 &
+    pidof tabbed | xargs kill -s USR1 > /dev/null 2>&1 &
+    skippy-xd --config-reload 2>&1
     # kill -HUP $(pidof hydra)
     # nitrogen --set-scaled "$HOME"/pics/wallpaper.png
     # convert -scale 10% -blur 0x2.5 -resize 1000% "$HOME"/pics/wallpaper.png "$HOME"/pics/wallpaper_blur.png
     # betterlockscreen -u "$HOME"/pics/wallpaper.png &
     # pkill lemonbar && lemonbar-dk &
     # dkcmd reload
-    nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 &
+    # nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1 &
     sleep 0.1 && xdotool key super+ctrl+r
 }
 
@@ -75,7 +77,7 @@ set_day(){
                     sed -i '8s/111111/c2c2c2/' "$HOME"/.config/picom.conf ;;
 
         adwaita)    sed -i '38s/393939/dddddd/' "$HOME"/.config/nvim/lua/plugins/ui/stcursorword.lua ; \
-                    sed -i '8s/111111/c2c2c2/' "$HOME"/.config/picom.conf ; \
+                    sed -i '8s/111111/333333/' "$HOME"/.config/picom.conf ; \
                     sed -i '4s/dark/light/' "$HOME"/.config/awesome/theme.lua ;; 
 
         minimal)    sed -i '6s/dark/light/' "$HOME"/.config/nvim/lua/settings.lua ; \
@@ -85,9 +87,10 @@ set_day(){
                     sed -i '8s/111111/c2c2c2/' "$HOME"/.config/picom.conf ;;
     esac
 
-	kill_reload
-
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+    kvantummanager --set KvLibadwaita
+
+    kill_reload
 
     notify-send -a daynight "changed to light theme"
 
@@ -111,7 +114,7 @@ set_night(){
                     sed -i '8s/c2c2c2/111111/' "$HOME"/.config/picom.conf ;;
 
         adwaita)    sed -i '38s/dddddd/393939/' "$HOME"/.config/nvim/lua/plugins/ui/stcursorword.lua ; \
-                    sed -i '8s/c2c2c2/111111/' "$HOME"/.config/picom.conf ; \
+                    sed -i '8s/333333/111111/' "$HOME"/.config/picom.conf ; \
                     sed -i '4s/light/dark/' "$HOME"/.config/awesome/theme.lua ;;
 
         minimal)    sed -i '6s/light/dark/' "$HOME"/.config/nvim/lua/settings.lua ; \
@@ -121,9 +124,10 @@ set_night(){
                     sed -i '8s/c2c2c2/111111/' "$HOME"/.config/picom.conf ;;
     esac
 
-	kill_reload
-
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    kvantummanager --set KvLibadwaitaDark
+
+	kill_reload
 
     notify-send -a daynight "changed to dark theme"
 

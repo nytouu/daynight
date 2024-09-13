@@ -1,6 +1,6 @@
 return {
 	"nvimdev/galaxyline.nvim",
-	enabled = true,
+	enabled = false,
 	event = "BufWinEnter",
 	config = function()
 		local gl = require("galaxyline")
