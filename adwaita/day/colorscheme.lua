@@ -1,18 +1,48 @@
+---@diagnostic disable: undefined-global
 return {
-	"askfiy/visual_studio_code",
-	priority = 1000,
-	config = function()
-		require("visual_studio_code").setup({
-			mode = "light",
-			transparent = true,
-		})
+    "Mofiqul/vscode.nvim",
+    priority = 1000,
+    config = function()
+        require('vscode').load('light')
 
-		vim.cmd([[colorscheme visual_studio_code]])
+        local c = require('vscode.colors').get_colors()
+        require("vscode").setup({
+            style = "light",
+            transparent = true,
+            italic_comments = true,
+            underline_links = true,
+            disable_nvimtree_bg = false,
+            group_overrides = {
+                NormalFloat = { bg = c.vscPopupBack },
+                NeoTreeNormal = { link = "NormalFloat" },
+                NeoTreeNormalNC = { link = "NormalFloat" },
 
-		require("visual_studio_code.utils").hl.bulk_set({
-			NormalFloat = { bg = "#ececec" },
-			NeoTreeNormal = { link = "NormalFloat" },
-			NeoTreeNormalNC = { link = "NormalFloat" },
-		})
-	end,
+                -- Telescope borders
+                -- TelescopeNormal = { link = "NormalFloat" },
+                -- TelescopeBorder = { bg = c.vscPopupBack, fg = c.vscContextCurrent, bold = true },
+                -- TelescopePreviewBorder = { link = "TelescopeBorder" },
+                -- TelescopePromptBorder = { link = "TelescopeBorder" },
+                -- TelescopeResultsBorder = { link = "TelescopeBorder" },
+
+                -- Telescope no borders
+                TelescopeBorder = { fg = c.vscPopupBack, bg = c.vscPopupBack },
+                TelescopeNormal = { bg = c.vscPopupBack },
+
+                TelescopePreviewBorder = { fg = c.vscPopupBack, bg = c.vscPopupBack },
+                TelescopePreviewNormal = { bg = c.vscPopupBack },
+                TelescopePreviewTitle = { fg = c.vscPopupBack, bg = c.vscGreen, bold = true },
+
+                TelescopeResultsBorder = { fg = c.vscSplitLight, bg = c.vscSplitLight },
+                TelescopeResultsNormal = { bg = c.vscSplitLight },
+                TelescopeResultsTitle = { fg = c.vscSplitLight, bg = c.vscLightBlue },
+
+                TelescopePromptTitle = { fg = c.vscSplitLight, bg = c.vscRed, bold = true },
+                TelescopePromptBorder = { fg = c.vscSplitLight, bg = c.vscSplitLight },
+                TelescopePromptNormal = { fg = c.vscFront, bg = c.vscSplitLight },
+                TelescopePromptPrefix = { fg = c.vscRed, bg = c.vscSplitLight },
+            }
+        })
+
+        vim.cmd.colorscheme "vscode"
+    end,
 }

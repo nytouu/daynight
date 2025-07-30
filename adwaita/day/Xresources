@@ -3,7 +3,7 @@ Xft.dpi: 96
 XTerm*renderFont: true
 XTerm*faceName: xft: MartianMono NF
 XTerm*faceSize: 13
-Xcursor.theme: Notwaita-Black
+Xcursor.theme: Bibata-Original-Classic
 Xcursor.size: 24
 Xft.hinting:    true
 Xft.hintstyle:  hintfull

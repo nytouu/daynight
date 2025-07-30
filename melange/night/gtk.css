@@ -36,11 +36,11 @@ window decoration {
     padding: 0;
 }
 
-@define-color accent_color #89B3B6;
-@define-color accent_bg_color mix(#89B3B6, #34302C,0.3);
+@define-color accent_color #B68389;
+@define-color accent_bg_color mix(#B68389, #34302C,0.3);
 @define-color accent_fg_color #ECE1D7;
-@define-color destructive_color #89B3B6;
-@define-color destructive_bg_color mix(#89B3B6, #34302C,0.3);
+@define-color destructive_color #B68389;
+@define-color destructive_bg_color mix(#B68389, #34302C,0.3);
 @define-color destructive_fg_color #ECE1D7;
 @define-color success_color #8ff0a4;
 @define-color success_bg_color #26a269;
@@ -49,7 +49,7 @@ window decoration {
 @define-color warning_bg_color #cd9309;
 @define-color warning_fg_color rgba(0, 0, 0, 0.8);
 @define-color error_color #ff7b63;
-@define-color error_bg_color mix(#89B3B6, #34302C,0.3);
+@define-color error_bg_color mix(#B68389, #34302C,0.3);
 @define-color error_fg_color #ECE1D7;
 @define-color window_bg_color #34302C;
 @define-color window_fg_color #ECE1D7;

@@ -1,149 +1,184 @@
 /**
- * Gruvbox rofi theme
  *
- * Color palette imported from https://github.com/sainnhe/gruvbox-material
- *
- */
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ **/
 
+/*****----- Configuration -----*****/
+configuration {
+	modi:                       "drun";
+    show-icons:                 true;
+    display-drun:               "Apps";
+    display-run:                "Run";
+    display-filebrowser:        "Files";
+    display-window:             "Windows";
+	drun-display-format:        "{name}\n[<span weight='light' size='small'><i>({generic})</i></span>]";
+	window-format:              "Class : {c}\nWorkspace : {w}";
+}
+
+/*****----- Global Properties -----*****/
 * {
-	gruv0: #1d2021;
-	gruv1: #32302f;
-	gruv2: #45403d;
-	gruv3: #5a524c;
-
-	gruv4: #fbf1c7;
-	gruv5: #f4e8be;
-	gruv6: #eee0b7;
-
-	gruv7: #a89984;
-	gruv8: #928374;
-	gruv9: #7c6f64;
-	gruv10: #504945;
-	red: #ea6962;
-
-	orange: #e78a4e;
-	yellow: #d8a657;
-	aqua: #89b482;
-	purple: #d3869b;
-
-    reddark: #c14a4a;
-    yellowdark: #b47109;
-
-    foreground:  @gruv9;
-    background-color:  transparent;
-
-    highlight: underline bold #eee0b7;
-
-    transparent: rgba(46,52,64,0);
-
+    font:                        "Torus Pro 11";
+    border-radius:               0px;
+    background-color:            transparent;
 }
 
+/*****----- Main Window -----*****/
 window {
-    location: center;
-    anchor:   center;
-    border-radius: 0px;
-    height: 280px;
-    width: 600px;
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    north;
+    anchor:                      north;
+    fullscreen:                  false;
+    width:                       500px;
+    x-offset:                    0px;
+    y-offset:                    260px;
+    border:                      2px;
+    border-radius:               0px;
+    border-color:                #45403d;
 
-    background-color: @transparent;
-    spacing: 0;
-    children:  [mainbox];
-    orientation: horizontal;
+    /* properties for all widgets */
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    cursor:                      "default";
+    background-color:            #32302fe6;
 }
 
+/*****----- Main Box -----*****/
 mainbox {
-    spacing: 0;
-    children: [ inputbar, message, listview ];
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     20px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
 }
 
-message {
-    padding: 10px;
-    border:  0px 2px 2px 2px;
-    border-color: @gruv0;
-    background-color: @gruv7;
-}
-
+/*****----- Inputbar -----*****/
 inputbar {
-    color: @gruv6;
-    padding: 14px;
-    background-color: @gruv0;
-    border-color: @gruv0;
-
-    border: 1px;
-    border-radius: 0px 0px 0px 0px;
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      4px;
+    background-color:            #222021e2;
+    border-radius:               12px;
+    children:                    [ "textbox-prompt-colon", "entry" ];
+    text-color:                  #5a524c;
 }
 
-entry, prompt, case-indicator {
-    text-font: inherit;
-    text-color: inherit;
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    padding:                     12px 14px;
+    border-color:                #928374;
+    background-color:            inherit;
+    text-color:                  white;
+    str:                         "";
+    font:                        "Symbols Nerd Font Mono 13";
+    vertical-align:              0.75;
+    horizontal-align:            0.50;
+}
+entry {
+    enabled:                     true;
+    font:                        "Torus Pro 12";
+    padding:                     12px 16px;
+    border:                      0px;
+    border-radius:               10px;
+    border-color:                #928374;
+    background-color:            inherit;
+    text-color:                  white;
+    cursor:                      text;
+    placeholder:                 "Search...";
+    placeholder-color:           #928374;
+    vertical-align:              0.75;
+    horizontal-align:            -0.5;
 }
 
-prompt {
-    margin: 0px 1em 0em 0em ;
-}
-
+/*****----- Listview -----*****/
 listview {
-    padding: 8px;
-    border-radius: 0px 0px 0px 0px;
-    border: 2px 2px 2px 2px;
-    border-color: @gruv0;
-    background-color: @gruv0;
-    dynamic: false;
+    enabled:                     true;
+    columns:                     1;
+    lines:                       6;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   true;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                false;
+    fixed-columns:               true;
+
+    spacing:                     5px;
+    background-color:            transparent;
+    cursor:                      "default";
 }
 
+/*****----- Elements -----*****/
 element {
-    padding: 5px;
-    vertical-align: 0.5;
-    border-radius: 10px;
-    color: @foreground;
-    text-color: @gruv6;
-    background-color: @gruv1;
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     6px;
+    border:                      0px solid;
+    border-radius:               10px;
+    background-color:            transparent;
+    text-color:                  white;
+    cursor:                      pointer;
 }
-
-element.normal.active {
-    background-color: @yellow;
+element normal.active {
+    background-image:            linear-gradient(to right, #19B466, #7BF4B7);
+    text-color:                  white;
 }
-
-element.normal.urgent {
-    background-color: @reddark;
+element selected.normal {
+    border-radius:               8px;
+    background-color:            #3f3939;
+	border:                      2px;
+	border-color:                #4f4a4a;
+    text-color:                  white;
 }
-
-element.selected.normal {
-    background-color: @gruv7;
-    text-color: @gruv0;
+element selected.active {
+    background-image:            linear-gradient(to right, #EA5553, #EAACAB);
+    text-color:                  white;
 }
-
-element.selected.active {
-    background-color: @yellowdark;
+element-icon {
+    background-color:            transparent;
+    size:                        48px;
+    cursor:                      inherit;
 }
-
-element.selected.urgent {
-    background-color: @red;
-}
-
-element.alternate.normal {
-    background-color: @transparent;
-}
-
-element-text, element-icon {
-    size: 3ch;
-    margin: 0 10 0 0;
-    vertical-align: 0.5;
-    background-color: inherit;
-    text-color: @gruv6;
+element-text {
+    background-color:            inherit;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
 }
 
 button {
-    padding: 6px;
-    color: @foreground;
-    horizontal-align: 0.5;
-
-    border: 2px 0px 2px 2px;
-    border-radius: 10px;
-    border-color: @foreground;
+    font:                        "Torus Pro Bold 12";
+    padding:                     8px;
+    border-radius:               100%;
+    background-image:            linear-gradient(to right, #C03FF2, #EEC2FF);
+    text-color:                  black;
+    cursor:                      pointer;
+}
+button selected {
+    background-image:            linear-gradient(to right, #44A2F0, #BDDDF8);
+    text-color:                  white;
 }
 
-button.selected.normal {
-    border: 2px 0px 2px 2px;
-    border-color: @foreground;
+/*****----- Message -----*****/
+error-message {
+    padding:                     14px;
+    background-color:            black;
+    text-color:                  white;
 }
+textbox {
+    padding:                     0px;
+    border-radius:               0px;
+    text-color:                  white;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/* vim:ft=css */

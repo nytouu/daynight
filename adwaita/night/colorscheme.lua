@@ -1,18 +1,48 @@
+---@diagnostic disable: undefined-global
 return {
-	"askfiy/visual_studio_code",
+	"Mofiqul/vscode.nvim",
 	priority = 1000,
 	config = function()
-		require("visual_studio_code").setup({
-			mode = "dark",
-			transparent = true,
+		require('vscode').load('dark')
+		local c = require('vscode.colors').get_colors()
+
+		local background_transparency = true
+		if vim.g.neovide then
+			background_transparency = false
+		end
+
+		require("vscode").setup({
+			style = "dark",
+
+			transparent = background_transparency,
+			italic_comments = true,
+			underline_links = true,
+			disable_nvimtree_bg = false,
+			group_overrides = {
+				NormalFloat = { bg = c.vscBack },
+				NeoTreeNormal = { link = "NormalFloat" },
+				NeoTreeNormalNC = { link = "NormalFloat" },
+				NeoTreeExpander = { bg = "NONE" },
+
+				-- Telescope no borders
+				TelescopeBorder = { fg = c.vscPopupBack, bg = c.vscPopupBack },
+				TelescopeNormal = { bg = c.vscPopupBack },
+
+				TelescopePreviewBorder = { fg = c.vscPopupBack, bg = c.vscPopupBack },
+				TelescopePreviewNormal = { bg = c.vscPopupBack },
+				TelescopePreviewTitle = { fg = c.vscPopupBack, bg = c.vscGreen, bold = true },
+
+				TelescopeResultsBorder = { fg = c.vscTabCurrent, bg = c.vscTabCurrent },
+				TelescopeResultsNormal = { bg = c.vscTabCurrent },
+				TelescopeResultsTitle = { fg = c.vscTabCurrent, bg = c.vscLightBlue },
+
+				TelescopePromptTitle = { fg = c.vscTabCurrent, bg = c.vscRed, bold = true },
+				TelescopePromptBorder = { fg = c.vscTabCurrent, bg = c.vscTabCurrent },
+				TelescopePromptNormal = { fg = c.vscFront, bg = c.vscTabCurrent },
+				TelescopePromptPrefix = { fg = c.vscRed, bg = c.vscTabCurrent },
+			}
 		})
 
-		vim.cmd([[colorscheme visual_studio_code]])
-
-		require("visual_studio_code.utils").hl.bulk_set({
-			NormalFloat = { bg = "#252526" },
-			NeoTreeNormal = { link = "NormalFloat" },
-			NeoTreeNormalNC = { link = "NormalFloat" },
-		})
+		vim.cmd.colorscheme "vscode"
 	end,
 }

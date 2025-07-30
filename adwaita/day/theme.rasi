@@ -30,14 +30,14 @@ configuration {
 window {
     /* properties for window widget */
     transparency:                "real";
-    location:                    center;
+    location:                    north;
     anchor:                      north;
     fullscreen:                  false;
     width:                       500px;
     x-offset:                    0px;
-    y-offset:                    -240px;
-	border:                      2px;
-	border-radius:               6px;
+    y-offset:                    260px;
+    border:                      2px;
+    border-radius:               0px;
 	border-color:                #cecece;
 
     /* properties for all widgets */
@@ -60,9 +60,10 @@ mainbox {
 /*****----- Inputbar -----*****/
 inputbar {
     enabled:                     true;
-    spacing:                     10px;
-    margin:                      0px;
+    spacing:                     0px;
+    margin:                      4px;
     background-color:            transparent;
+    border-radius:               12px;
     children:                    [ "textbox-prompt-colon", "entry" ];
     text-color:                  #585858;
 }
@@ -102,7 +103,7 @@ listview {
     lines:                       6;
     cycle:                       true;
     dynamic:                     true;
-    scrollbar:                   false;
+    scrollbar:                   true;
     layout:                      vertical;
     reverse:                     false;
     fixed-height:                false;

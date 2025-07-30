@@ -5,6 +5,9 @@ return {
 	config = function()
 		local hi = vim.api.nvim_set_hl
 
+		hi(0, "NeoTreeNormal", { link = "NormalFloat" })
+		hi(0, "NeoTreeNormalNC", { link = "NormalFloat" })
+		hi(0, "NeoTreeExpander", { bg = "NONE" })
 		hi(0, "WinSeparator", { fg = "#34302c", bg = "#34302c" })
 		hi(0, "NeoTreeWinSeparator", { fg = "#34302c", bg = "#34302c" })
 		hi(0, "NeoTreeStatusLine", { fg = "#34302c", bg = "#34302c" })
